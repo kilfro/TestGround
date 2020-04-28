@@ -8,7 +8,7 @@ export const authReducer = (state = initialState.user, action) => {
 
             return {
                 authenticated: true,
-                photoUrl: user.photoUrl,
+                photoURL: user.photoURL,
                 uid: user.uid,
                 displayName: user.displayName,
                 token: token

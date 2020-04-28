@@ -2,7 +2,7 @@ export default {
     error: null,
     user: {
         authenticated: false,
-        photoUrl: null,
+        photoURL: null,
         uid: null,
         displayName: null,
         token: null
