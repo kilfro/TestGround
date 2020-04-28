@@ -1,4 +1,9 @@
 module.exports = app => {
-    const db = require("./queries");
+    const QUERY = require("./queries");
 
+    app.route('/api/user')
+        .post(QUERY.insertUser);
+
+    app.route('/api/user/:uid')
+        .get(QUERY.getUserByUid);
 };

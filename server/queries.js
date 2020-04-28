@@ -6,5 +6,39 @@ const {Pool} = require("pg"),
         password: "testground"
     });
 
+const getUserByUid = (req, res) => {
+    const uid = req.params.uid;
 
-module.exports = {};
+    pool.query(
+        "SELECT * FROM users WHERE uid = $1",
+        [uid],
+        (error, result) => {
+            if (error) {
+                throw error;
+            }
+
+            res.status(200).json(result.rows);
+        }
+    )
+};
+
+const insertUser = (req, res) => {
+    const {uid, name, email, photoURL} = req.body;
+
+    pool.query(
+        "INSERT INTO users (uid, name, email, photo_url) VALUES ($1, $2, $3, $4)",
+        [uid, name, email, photoURL],
+        (error, result) => {
+            if (error) {
+                throw error;
+            }
+
+            res.status(200);
+        }
+    )
+};
+
+module.exports = {
+    getUserByUid,
+    insertUser
+};

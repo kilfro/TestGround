@@ -41,7 +41,6 @@ getFirebaseUser()
         }
         const token = await getFirebaseToken();
         store.dispatch(loginSuccess(user, token));
-        console.log(user);
         return user;
     })
     .catch(err => createError(err));
