@@ -11,6 +11,10 @@ export function logUserOut() {
     return FirebaseApp.auth().signOut();
 }
 
+export function loginWithEmail(email, password) {
+    return FirebaseApp.auth().signInWithEmailAndPassword(email, password);
+}
+
 export function getFirebaseToken() {
     const currentUser = FirebaseApp.auth().currentUser;
     if (!currentUser) {

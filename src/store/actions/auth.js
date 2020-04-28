@@ -1,10 +1,20 @@
 import {AUTH} from "../actionTypes";
 
-export function loginRequest() {
+export function loginWithGoogle() {
     return {
-        type: AUTH.LOGIN_REQUEST
+        type: AUTH.LOGIN_WITH_GOOGLE
     }
 }
+
+export const loginWithEmail = (email, password) => {
+    return {
+        type: AUTH.LOGIN_WITH_EMAIL,
+        payload: {
+            email,
+            password
+        }
+    }
+};
 
 export function loginSuccess(user, token) {
     return {

@@ -1,21 +1,28 @@
 import React from 'react';
-import {loginRequest, logoutRequest} from '../../store/actions/auth';
+import {loginWithEmail, loginWithGoogle, logoutRequest} from '../../store/actions/auth';
 import {connect} from 'react-redux';
-import {Button} from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core';
 
 class Login extends React.Component {
+    submitEmailLogin = () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        this.props.loginWithEmail(email, password);
+    };
+
     render() {
-        const {displayName, uid, error, authenticated, loginRequest, logoutRequest} = this.props;
+        const {loginWithGoogle, logoutRequest} = this.props;
         return (
             <div>
-                <p>{error}</p>
-                <p>{displayName}</p>
-                <p>{uid}</p>
+                {/*<form onSubmit={this.submitEmailLogin}>*/}
+                <TextField id={'email'} label={'E-mail'} type={'email'}/>
+                <TextField id={'password'} label={'Пароль'} type={'password'}/>
+                <Button onClick={this.submitEmailLogin}>Войти</Button>
+                {/*</form>*/}
 
-                {authenticated ?
-                    <Button variant="outlined" onClick={() => logoutRequest()}>Logout</Button>
-                    : <Button variant="outlined" onClick={() => loginRequest()}>Login</Button>
-                }
+                <Button variant="outlined" onClick={() => loginWithGoogle()}>Войти с Google</Button>
+                <Button variant="outlined" onClick={() => logoutRequest()}>Logout</Button>
             </div>
         )
     }
@@ -29,7 +36,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    loginRequest,
+    loginWithEmail,
+    loginWithGoogle,
     logoutRequest
 };
 
