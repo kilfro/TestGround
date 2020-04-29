@@ -1,0 +1,12 @@
+.registration-form-container {
+    text-align: center;
+    user-select: none;
+}
+
+.registration-form-container div {
+    margin-top: 1em;
+}
+
+.registration-form-container button {
+    margin-top: 2em;
+}

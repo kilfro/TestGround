@@ -15,6 +15,10 @@ export function loginWithEmail(email, password) {
     return FirebaseApp.auth().signInWithEmailAndPassword(email, password);
 }
 
+export function registerWithEmail(email, password) {
+    return FirebaseApp.auth().createUserWithEmailAndPassword(email, password);
+}
+
 export function getFirebaseToken() {
     const currentUser = FirebaseApp.auth().currentUser;
     if (!currentUser) {

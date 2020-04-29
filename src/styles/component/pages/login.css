@@ -3,7 +3,7 @@
     user-select: none;
 }
 
-div {
+.login-form-container div {
     margin-bottom: 1em;
 }
 

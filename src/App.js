@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router';
+import {BrowserRouter} from 'react-router-dom';
 import Login from './components/pages/Login';
 import NotFound from "./components/pages/NotFound";
 import Registration from "./components/pages/Registration";
