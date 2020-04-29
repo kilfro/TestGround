@@ -1,4 +1,4 @@
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 import {AUTH} from "../actionTypes";
 import {getFirebaseToken, loginWithEmail, loginWithGoogle, logUserOut} from "../../auth/auth";
 import {loginSuccess, logoutSuccess} from "../actions/auth";
@@ -62,7 +62,7 @@ function* loginGoogle() {
 }
 
 export function* watchLogout() {
-    yield takeLatest(AUTH.LOGOUT_REQUEST, logoutUser)
+    yield takeEvery(AUTH.LOGOUT_REQUEST, logoutUser)
 }
 
 function* logoutUser() {

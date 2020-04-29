@@ -1,0 +1,17 @@
+.login-form-container {
+    text-align: center;
+    user-select: none;
+}
+
+div {
+    margin-bottom: 1em;
+}
+
+#login-btn {
+    margin: 1em 0;
+}
+
+.google_logo {
+    margin-right: 1em;
+    height: 2em;
+}

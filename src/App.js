@@ -3,19 +3,20 @@ import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Login from './components/pages/Login';
 import NotFound from "./components/pages/NotFound";
-import {Container} from "@material-ui/core/es/index";
+import Registration from "./components/pages/Registration";
+import HomePage from "./components/pages/HomePage";
 
 const App = () => {
     return (
         <div className="App">
-            <Container maxWidth="md">
-                <BrowserRouter>
-                    <Switch>
-                        <Route path={'/login'} component={Login}/>
-                        <Route path={'*'} component={NotFound}/>
-                    </Switch>
-                </BrowserRouter>
-            </Container>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path={'/'} component={HomePage}/>
+                    <Route path={'/login'} component={Login}/>
+                    <Route path={'/registration'} component={Registration}/>
+                    <Route path={'*'} component={NotFound}/>
+                </Switch>
+            </BrowserRouter>
         </div>
     );
 };
