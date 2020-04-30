@@ -35,6 +35,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "react-scripts build",
     "test": "jest",
+    "test:c": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
