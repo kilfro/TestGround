@@ -10,6 +10,7 @@ import {Snackbar} from "@material-ui/core";
 import {Alert} from '@material-ui/lab';
 import {connect} from 'react-redux';
 import {deleteError} from "./store/actions/error";
+import Header from "./components/header/Header";
 
 const App = (props) => {
     const {error, deleteError} = props;
@@ -17,6 +18,7 @@ const App = (props) => {
     return (
         <div className="App">
             <BrowserRouter>
+                <Header/>
                 <Switch>
                     <Route exact path={'/'} component={HomePage}/>
                     <Route path={'/login'} component={Login}/>

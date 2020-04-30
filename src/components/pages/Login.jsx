@@ -27,7 +27,7 @@ class Login extends React.Component {
                     <TextField id={'email'} label={'E-mail'} type={'email'} fullWidth/>
                     <TextField id={'password'} label={'Пароль'} type={'password'} fullWidth/>
                     <Button id={'login-btn'} type={'submit'} color={'primary'} variant={'contained'}
-                            fullWidth>Войти</Button>
+                            fullWidth className={'ground_btn'}>Войти</Button>
                     <Button href={'/registration'} fullWidth>Зарегистрироваться</Button>
                 </form>
                 <h4>или</h4>

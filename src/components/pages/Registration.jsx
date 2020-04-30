@@ -54,7 +54,7 @@ class Registration extends React.Component {
                     <TextField id={'password'} label={'Пароль'} type={'password'} fullWidth required/>
                     <TextField id={'repeat-password'} label={'Повторите пароль'} type={'password'} fullWidth required/>
                     <Button type={'submit'} color={'primary'} variant={'contained'}
-                            fullWidth>Зарегистрироваться</Button>
+                            fullWidth className={'ground_btn'}>Зарегистрироваться</Button>
                 </form>
             </Container>
         );
