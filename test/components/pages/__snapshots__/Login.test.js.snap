@@ -41,6 +41,7 @@ exports[`Login page should be correctly 1`] = `
           onFocus={[Function]}
           required={false}
           type="email"
+          value=""
         />
       </div>
     </div>
@@ -71,6 +72,7 @@ exports[`Login page should be correctly 1`] = `
           onFocus={[Function]}
           required={false}
           type="password"
+          value=""
         />
       </div>
     </div>
@@ -128,6 +130,7 @@ exports[`Login page should be correctly 1`] = `
   <button
     className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSizeLarge MuiButton-sizeLarge"
     disabled={false}
+    id="google-btn"
     onBlur={[Function]}
     onClick={[Function]}
     onDragLeave={[Function]}
