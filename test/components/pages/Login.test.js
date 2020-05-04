@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 import Login from "../../../src/components/pages/Login";
 import {Provider} from "react-redux";
 import {AUTH} from "../../../src/store/actionTypes";
-import {Router} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -29,8 +28,7 @@ describe('Login page', () => {
     });
 
     test('should be correctly', () => {
-        expect(component.toJSON())
-            .toMatchSnapshot();
+        expect(component.toJSON()).toMatchSnapshot();
     });
 
     test('should dispatch an action on google button click', () => {

@@ -9,7 +9,7 @@ import logo from '../../logo.png';
 import {loginSuccess} from "../../store/actions/auth";
 import {createUser} from "../../api/api";
 
-class Registration extends React.Component {
+export class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
