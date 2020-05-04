@@ -1,62 +1,36 @@
 import React from 'react';
-import {act, create} from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
-import Login from "../../../src/components/pages/Login";
-import {Provider} from "react-redux";
-import {AUTH} from "../../../src/store/actionTypes";
+import {Login} from "../../../src/components/pages/Login";
 
-const mockStore = configureStore([]);
-
-describe('Login page', () => {
-    let store;
-    let component;
+describe('Login page enzyme tests', () => {
+    let wrapper;
+    const loginFunc = jest.fn();
+    const loginGoogle = jest.fn();
 
     beforeEach(() => {
-        store = mockStore({
-            auth: {
-                authenticated: false
-            }
-        });
-
-        store.dispatch = jest.fn();
-
-        component = create(
-            <Provider store={store}>
-                <Login/>
-            </Provider>
-        );
+        wrapper = mount(<Login loginWithEmail={loginFunc} loginWithGoogle={loginGoogle}/>);
     });
 
-    test('should be correctly', () => {
-        expect(component.toJSON()).toMatchSnapshot();
+    afterEach(() => {
+        wrapper.unmount();
     });
 
-    test('should dispatch an action on google button click', () => {
-        act(() => {
-            component.root.findByProps({id: 'google-btn'}).props.onClick();
-        });
-
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith({type: AUTH.LOGIN_WITH_GOOGLE});
+    it('should be correctly', () => {
+        expect(wrapper).toMatchSnapshot();
     });
 
-    test('should dispatch an action on login button click', () => {
-        const root = component.root;
-        const event = {
-            preventDefault: () => {
-            }
-        };
-        act(() => {
-            root.findByType('form').props.onSubmit(event);
-        });
+    it('should login with email', () => {
+        wrapper.find('input#email').simulate('change', {target: {id: 'email', value: 'test@email.com'}});
+        wrapper.find('input#password').simulate('change', {target: {id: 'password', value: 'password'}});
 
-        expect(store.dispatch).toHaveBeenCalledTimes(1);
-        expect(store.dispatch).toHaveBeenCalledWith({
-            type: AUTH.LOGIN_WITH_EMAIL,
-            payload: {
-                email: '',
-                password: ''
-            }
-        });
+        wrapper.find('form').simulate('submit');
+
+        expect(loginFunc).toHaveBeenCalled();
+        expect(loginFunc).toHaveBeenCalledWith('test@email.com', 'password');
+    });
+
+    it('should login with google', () => {
+        wrapper.find('button#google-btn').simulate('click');
+
+        expect(loginGoogle).toHaveBeenCalled();
     });
 });

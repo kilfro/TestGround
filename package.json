@@ -65,13 +65,17 @@
     "jest-enzyme": "^7.1.2",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
-    "enzyme-to-json": "^3.4.4"
+    "enzyme-to-json": "^3.4.4",
+    "jsdom": "^8.0.0-0"
   },
   "jest": {
     "testEnvironment": "node",
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.js"
+    ]
   }
 }
