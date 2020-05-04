@@ -37,3 +37,12 @@ export function logoutSuccess() {
         type: AUTH.LOGOUT_SUCCESS
     }
 }
+
+export function registerUser(email, password) {
+    return {
+        type: AUTH.REGISTER_REQUEST,
+        payload: {
+            email, password
+        }
+    }
+}

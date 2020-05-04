@@ -2,18 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Button, Container, TextField} from "@material-ui/core";
 import '../../styles/component/pages/registration.css';
-import {registerWithEmail} from "../../auth/auth";
 import {createError} from "../../store/actions/error";
 import {Redirect} from "react-router";
 import logo from '../../logo.png';
-import {loginSuccess} from "../../store/actions/auth";
-import {createUser} from "../../api/api";
+import {registerUser} from "../../store/actions/auth";
 
 export class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            successRegistration: false,
             email: '',
             password: '',
             repeatPassword: ''
@@ -27,19 +24,10 @@ export class Registration extends React.Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        const {createError, loginSuccess} = this.props;
+        const {createError, registerUser} = this.props;
         const {email, password, repeatPassword} = this.state;
         if (password === repeatPassword) {
-            registerWithEmail(email, password)
-                .then(res => {
-                    loginSuccess({uid: res.uid});
-                    createUser({
-                        uid: res.uid,
-                        email
-                    });
-                })
-                .catch(e => createError(e));
-            this.setState({successRegistration: true});
+            registerUser(email, password);
         } else {
             createError('Пароли не совпадают')
         }
@@ -47,11 +35,11 @@ export class Registration extends React.Component {
 
     render() {
         const {authenticated} = this.props;
-        const {successRegistration, email, password, repeatPassword} = this.state;
+        const {email, password, repeatPassword} = this.state;
 
         return (
             <Container maxWidth={'xs'} className={'registration-form-container'}>
-                {(authenticated || successRegistration) && <Redirect to={'/'}/>}
+                {authenticated && <Redirect to={'/'}/>}
 
                 <img src={logo} alt={'logo'}/>
                 <h3>Заполните форму для регистрации:</h3>
@@ -78,7 +66,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     createError,
-    loginSuccess
+    registerUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

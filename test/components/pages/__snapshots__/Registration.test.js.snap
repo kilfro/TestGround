@@ -17,7 +17,7 @@ exports[`Registration page should render correctly 1`] = `
     <Registration
       authenticated={false}
       createError={[Function]}
-      loginSuccess={[Function]}
+      registerUser={[Function]}
     >
       <WithStyles(ForwardRef(Container))
         className="registration-form-container"

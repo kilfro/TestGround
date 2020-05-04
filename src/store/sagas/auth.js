@@ -1,9 +1,10 @@
 import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 import {AUTH} from "../actionTypes";
-import {getFirebaseToken, loginWithEmail, loginWithGoogle, logUserOut} from "../../auth/auth";
+import {getFirebaseToken, loginWithEmail, loginWithGoogle, logUserOut, registerWithEmail} from "../../auth/auth";
 import {loginSuccess, logoutSuccess} from "../actions/auth";
 import {createError} from "../actions/error";
 import * as API from '../../api/api';
+import {createUser} from '../../api/api';
 
 export function* watchLoginWithEmail() {
     yield takeLatest(AUTH.LOGIN_WITH_EMAIL, loginEmail);
@@ -71,5 +72,20 @@ function* logoutUser() {
         yield put(logoutSuccess());
     } catch (e) {
         yield put(createError(e.message));
+    }
+}
+
+export function* watchRegister() {
+    yield takeLatest(AUTH.REGISTER_REQUEST, registerUser);
+}
+
+function* registerUser(action) {
+    const {email, password} = action.payload;
+    try {
+        const registered = yield call(registerWithEmail, email, password);
+        yield put(loginSuccess({uid: registered.uid}));
+        yield call(createUser, {uid: registered.uid, email});
+    } catch (e) {
+        createError(e.message);
     }
 }
