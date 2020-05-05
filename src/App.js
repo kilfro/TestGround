@@ -11,6 +11,7 @@ import {Alert} from '@material-ui/lab';
 import {connect} from 'react-redux';
 import {deleteError} from "./store/actions/error";
 import Header from "./components/header/Header";
+import TestCreator from "./components/creator/TestCreator";
 
 const App = (props) => {
     const {error, deleteError} = props;
@@ -23,6 +24,7 @@ const App = (props) => {
                     <Route exact path={'/'} component={HomePage}/>
                     <Route path={'/login'} component={Login}/>
                     <Route path={'/registration'} component={Registration}/>
+                    <Route path={'/create'} component={TestCreator}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </BrowserRouter>

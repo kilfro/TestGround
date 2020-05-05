@@ -1,5 +1,6 @@
 .header-logo {
     height: 40px;
+    margin-right: 1em;
 }
 
 .header {
@@ -8,4 +9,8 @@
 
 .menu-container {
     flex-grow: 1;
+}
+
+.menu-icon {
+    margin-right: 5px;
 }

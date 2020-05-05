@@ -48,4 +48,16 @@ describe('Header component', () => {
         expect(store.dispatch).toHaveBeenCalled();
         expect(store.dispatch).toHaveBeenCalledWith({type: AUTH.LOGOUT_REQUEST});
     });
+
+    it('should render link test creator only if user is authenticated', () => {
+        const wrapper = shallow(
+            <Header authenticated={false}/>
+        );
+
+        expect(wrapper.find('#create_header_btn')).toHaveLength(0);
+
+        wrapper.setProps({authenticated: true});
+
+        expect(wrapper.find('#create_header_btn')).toHaveLength(1);
+    });
 });
