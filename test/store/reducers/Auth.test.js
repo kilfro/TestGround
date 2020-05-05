@@ -1,6 +1,6 @@
-import {authReducer} from '../../../../src/store/reducers/auth';
-import initialState from '../../../../src/store/initialState';
-import {AUTH} from '../../../../src/store/actionTypes';
+import {authReducer} from '../../../src/store/reducers/auth';
+import initialState from '../../../src/store/initialState';
+import {AUTH} from '../../../src/store/actionTypes';
 
 const token = 'user token';
 const user = {

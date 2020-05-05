@@ -1,5 +1,5 @@
-import {createError, deleteError} from '../../../../src/store/actions/error';
-import {ERROR} from '../../../../src/store/actionTypes';
+import {createError, deleteError} from '../../../src/store/actions/error';
+import {ERROR} from '../../../src/store/actionTypes';
 
 describe('Error action creator', () => {
     test('create error action works correctly', () => {

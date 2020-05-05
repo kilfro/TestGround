@@ -1,6 +1,6 @@
-import {errorReducer} from '../../../../src/store/reducers/error';
-import initialState from '../../../../src/store/initialState';
-import {ERROR} from '../../../../src/store/actionTypes';
+import {errorReducer} from '../../../src/store/reducers/error';
+import initialState from '../../../src/store/initialState';
+import {ERROR} from '../../../src/store/actionTypes';
 
 const createErrorAction = {
     type: ERROR.CREATE,

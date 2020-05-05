@@ -4,8 +4,8 @@ import {
     loginWithGoogle,
     logoutRequest,
     logoutSuccess
-} from '../../../../src/store/actions/auth';
-import {AUTH} from '../../../../src/store/actionTypes';
+} from '../../../src/store/actions/auth';
+import {AUTH} from '../../../src/store/actionTypes';
 
 describe('Auth action creator', () => {
     test('login with google action is created correctly', () => {
