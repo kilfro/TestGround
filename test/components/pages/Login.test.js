@@ -1,8 +1,9 @@
 import React from 'react';
-import Login from "../../../src/components/pages/Login";
+import ConnectedLogin, {Login} from "../../../src/components/pages/Login";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {AUTH} from "../../../src/store/actionTypes";
+import {Redirect} from "react-router-dom";
 
 describe('Login page enzyme tests', () => {
     let wrapper, store;
@@ -21,7 +22,7 @@ describe('Login page enzyme tests', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Login loginWithEmail={loginFunc} loginWithGoogle={loginGoogle}/>
+                <ConnectedLogin loginWithEmail={loginFunc} loginWithGoogle={loginGoogle}/>
             </Provider>
         );
     });
@@ -51,5 +52,12 @@ describe('Login page enzyme tests', () => {
         wrapper.find('button#google-btn').simulate('click');
 
         expect(store.dispatch).toHaveBeenCalled();
+    });
+
+    it('should redirect if user is authenticated', () => {
+        const component = shallow(<Login authenticated={true}/>);
+
+        expect(component.find(Redirect)).toHaveLength(1);
+        expect(component.find(Redirect).props().to).toEqual('/');
     });
 });

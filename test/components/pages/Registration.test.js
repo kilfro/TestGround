@@ -2,8 +2,9 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import {create} from 'react-test-renderer';
 import {Provider} from "react-redux";
-import Registration from "../../../src/components/pages/Registration";
+import ConnectedRegistration, {Registration} from "../../../src/components/pages/Registration";
 import {AUTH, ERROR} from "../../../src/store/actionTypes";
+import {Redirect} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -21,7 +22,7 @@ describe('Registration page', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Registration/>
+                <ConnectedRegistration/>
             </Provider>
         );
     });
@@ -61,5 +62,12 @@ describe('Registration page', () => {
             type: AUTH.REGISTER_REQUEST,
             payload: {email: 'email@test.com', password: 'password'}
         });
+    });
+
+    it('should redirect if user is authenticated', () => {
+        const component = shallow(<Registration authenticated={true}/>);
+
+        expect(component.find(Redirect)).toHaveLength(1);
+        expect(component.find(Redirect).props().to).toEqual('/');
     });
 });
