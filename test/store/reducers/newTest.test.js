@@ -54,14 +54,14 @@ describe('NewTest reducer', () => {
         expect(questions).toEqual([
             {
                 id: 1,
-                type: 'one',
+                multiple: false,
                 cost: 1,
                 question: '',
                 options: [{id: 1, text: '', isRight: false}]
             },
             {
                 id: 2,
-                type: 'one',
+                multiple: false,
                 cost: 1,
                 question: '',
                 options: [{id: 1, text: '', isRight: false}]
@@ -100,9 +100,9 @@ describe('NewTest reducer', () => {
         const state = {
             ...initialState.newTest,
             questions: [
-                {id: 1, type: 'one'},
-                {id: 2, type: 'one'},
-                {id: 3, type: 'one'}
+                {id: 1, multiple: true},
+                {id: 2, multiple: false},
+                {id: 3, multiple: true}
             ]
         };
 
@@ -115,7 +115,7 @@ describe('NewTest reducer', () => {
 
         const questions = newTestReducer(state, action).questions;
 
-        expect(questions).toEqual([{id: 1, type: 'one'}, {id: 3, type: 'one'}]);
+        expect(questions).toEqual([{id: 1, multiple: true}, {id: 3, multiple: true}]);
     });
 
     it('should clean newTest state correctly', () => {
@@ -129,7 +129,7 @@ describe('NewTest reducer', () => {
                 onlyRegistered: false,
                 needPassword: false
             },
-            questions: [{id: 1, type: 'one', cost: 1, question: '', options: [{id: 1, text: '', isRight: false}]}]
+            questions: [{id: 1, multiple: true, cost: 1, question: '', options: [{id: 1, text: '', isRight: false}]}]
         };
 
         expect(newTestReducer(state, {type: NEW_TEST.CLEAN_STATE})).toEqual(initialState.newTest);

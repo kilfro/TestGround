@@ -1,43 +1,51 @@
 import React from 'react';
-import {Card, Checkbox, MenuItem, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {connect} from 'react-redux';
+import {Card, Checkbox, FormControlLabel, TextField} from "@material-ui/core";
 import '../../styles/component/creator/question.css';
+import {changeQuestion} from "../../store/actions/newTest";
 
 const Question = (props) => {
-    const {type, cost, question, options} = props;
+    const {id, multiple, cost, question} = props.question;
+    const {changeQuestion} = props;
 
-    const checkNumber = (event) => {
+    const changeHandler = (event) => {
+        const target = event.target.id;
         const value = event.target.value;
 
-        if (value < 0) {
-            return 0;
+        if (target === 'multiple') {
+            changeQuestion({
+                multiple: event.target.checked,
+                id
+            });
+        } else {
+            changeQuestion({
+                [target]: value,
+                id
+            });
         }
     };
 
     return (
         <Card className='create-question-card'>
-            <TextField id={'type'} className='question-option' label='Типо вопроса' select>
-                <MenuItem value={'one'}>выбор одного</MenuItem>
-                <MenuItem value={'several'}>выбор нескольких</MenuItem>
-            </TextField>
+
+            <FormControlLabel
+                control={<Checkbox checked={multiple} onChange={changeHandler} id={'multiple'}/>}
+                label='Выбор нескольких вариантов ответов'
+                className='question-option'
+            />
+
             <TextField id={'cost'} className='question-option' label={'Баллы за верный ответ'} type={'number'}
-                       inputProps={{min: 0, step: 1}} onChange={checkNumber}/>
+                       inputProps={{min: 0, step: 1}} onChange={changeHandler} value={cost}/>
+
             <h3>Вопрос:</h3>
-            <TextField multiline rows={3} fullWidth id={'question'}/>
-            <h3>Ответы:</h3>
-            <span>Отметьте верные варианты</span>
-            {
-                type !== 'one' ?
-                    <RadioGroup aria-label="gender" name="gender1">
-                        <Radio color="primary"/>
-                    </RadioGroup>
-                    :
-                    <Checkbox
-                        color="primary"
-                        inputProps={{'aria-label': 'secondary checkbox'}}
-                    />
-            }
+            <TextField multiline rows={3} fullWidth id={'question'} value={question} onChange={changeHandler}/>
+
         </Card>
     )
 };
 
-export default Question;
+const mapDispatchToProps = {
+    changeQuestion
+};
+
+export default connect(null, mapDispatchToProps)(Question);

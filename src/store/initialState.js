@@ -20,7 +20,7 @@ export default {
         questions: [
             {
                 id: 1,
-                type: 'one',
+                multiple: false,
                 cost: 1,
                 question: '',
                 options: [
