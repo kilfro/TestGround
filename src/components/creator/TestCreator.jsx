@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, Container, Tab, Tabs} from "@material-ui/core";
+import {Container, Tab, Tabs} from "@material-ui/core";
 import '../../styles/component/creator/testcreator.css';
 import TabPanel from "../supporting/TabPanel";
 import TestDescription from "./TestDescription";
+import QuestionsList from "./QuestionsList";
 
 class TestCreator extends React.Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class TestCreator extends React.Component {
             password: '',
             anonymous: false,
             onlyRegistered: false,
-            needPassword: false
+            needPassword: false,
+            questions: []
         };
     }
 
@@ -39,8 +41,19 @@ class TestCreator extends React.Component {
         }
     };
 
+    createNewQuestion = () => {
+        this.setState((prev) => {
+            return {
+                questions: prev.questions.concat({})
+            }
+        })
+    };
+
     render() {
-        const {tabPosition, name, description, anonymous, onlyRegistered, needPassword, password} = this.state;
+        const {
+            tabPosition, name, description, anonymous,
+            onlyRegistered, needPassword, password, questions
+        } = this.state;
 
         const descriptionProps = {
             name,
@@ -50,6 +63,11 @@ class TestCreator extends React.Component {
             needPassword,
             password,
             changeFieldHandler: this.changeFieldHandler
+        };
+
+        const questionsProps = {
+            questions,
+            createNewQuestion: this.createNewQuestion
         };
 
         return (
@@ -65,8 +83,7 @@ class TestCreator extends React.Component {
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={1}>
-                    There will be questions here.
-                    <Button fullWidth id={'add_btn'} color={'primary'} variant={'contained'}>Добавить вопрос</Button>
+                    <QuestionsList {...questionsProps}/>
                 </TabPanel>
                 <TabPanel tabPosition={tabPosition} index={2}>There will be results description here.</TabPanel>
             </Container>

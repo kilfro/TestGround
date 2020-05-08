@@ -78,6 +78,12 @@
     },
     "setupFilesAfterEnv": [
       "<rootDir>/test/setupTests.js"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/server/**",
+      "!**/coverage/**"
     ]
   }
 }

@@ -1,0 +1,9 @@
+.create-question-card {
+    margin: .5em 0;
+    padding: 1em;
+}
+
+.question-option {
+    width: 45%;
+    margin: 0 1em !important;
+}
