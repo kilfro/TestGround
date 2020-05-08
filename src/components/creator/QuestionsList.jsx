@@ -4,7 +4,7 @@ import Question from "./Question";
 
 class QuestionsList extends React.Component {
     render() {
-        const {questions, createNewQuestion} = this.props;
+        const {questions = [], createNewQuestion} = this.props;
 
         return (
             <>

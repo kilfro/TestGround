@@ -9,14 +9,7 @@ class TestCreator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabPosition: 0,
-            name: '',
-            description: '',
-            password: '',
-            anonymous: false,
-            onlyRegistered: false,
-            needPassword: false,
-            questions: []
+            tabPosition: 0
         };
     }
 
@@ -31,16 +24,6 @@ class TestCreator extends React.Component {
         this.setState({tabPosition: newValue})
     };
 
-    changeFieldHandler = (event) => {
-        const {id, value, checked} = event.target;
-
-        if (id === 'anonymous' || id === 'onlyRegistered' || id === 'needPassword') {
-            this.setState({[id]: checked});
-        } else {
-            this.setState({[id]: value});
-        }
-    };
-
     createNewQuestion = () => {
         this.setState((prev) => {
             return {
@@ -50,25 +33,7 @@ class TestCreator extends React.Component {
     };
 
     render() {
-        const {
-            tabPosition, name, description, anonymous,
-            onlyRegistered, needPassword, password, questions
-        } = this.state;
-
-        const descriptionProps = {
-            name,
-            description,
-            anonymous,
-            onlyRegistered,
-            needPassword,
-            password,
-            changeFieldHandler: this.changeFieldHandler
-        };
-
-        const questionsProps = {
-            questions,
-            createNewQuestion: this.createNewQuestion
-        };
+        const {tabPosition} = this.state;
 
         return (
             <Container maxWidth={'md'}>
@@ -79,11 +44,11 @@ class TestCreator extends React.Component {
                 </Tabs>
 
                 <TabPanel tabPosition={tabPosition} index={0}>
-                    <TestDescription {...descriptionProps}/>
+                    <TestDescription/>
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={1}>
-                    <QuestionsList {...questionsProps}/>
+                    <QuestionsList/>
                 </TabPanel>
                 <TabPanel tabPosition={tabPosition} index={2}>There will be results description here.</TabPanel>
             </Container>
