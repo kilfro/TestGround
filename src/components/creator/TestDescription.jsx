@@ -31,7 +31,6 @@ const TestDescription = (props) => {
             event.target.value;
 
         const newDescription = {
-            ...props.description,
             [target]: value
         };
 

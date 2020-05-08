@@ -6,7 +6,10 @@ export function newTestReducer(state = initialTest.newTest, action) {
         case (NEW_TEST.CHANGE_DESCRIPTION):
             return {
                 ...state,
-                description: {...action.payload}
+                description: {
+                    ...state.description,
+                    ...action.payload
+                }
             };
         case (NEW_TEST.CREATE_UID):
             return {
