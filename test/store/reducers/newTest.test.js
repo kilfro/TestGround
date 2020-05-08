@@ -45,14 +45,7 @@ describe('NewTest reducer', () => {
 
     it('should add question into the state', () => {
         const action = {
-            type: NEW_TEST.ADD_QUESTION,
-            payload: {
-                id: 2,
-                type: 'one',
-                cost: 1,
-                question: 'New question',
-                options: [{id: 1, text: 'First option', isRight: true}]
-            }
+            type: NEW_TEST.ADD_QUESTION
         };
 
         const questions = newTestReducer(undefined, action).questions;
@@ -70,10 +63,59 @@ describe('NewTest reducer', () => {
                 id: 2,
                 type: 'one',
                 cost: 1,
-                question: 'New question',
-                options: [{id: 1, text: 'First option', isRight: true}]
+                question: '',
+                options: [{id: 1, text: '', isRight: false}]
             }
         ])
+    });
+
+    it('should correctly change question', () => {
+        const state = {
+            ...initialState.newTest,
+            questions: [
+                {id: 1, question: 'one'},
+                {id: 2, question: 'two'},
+                {id: 3, question: 'three'}
+            ]
+        };
+
+        const action = {
+            type: NEW_TEST.CHANGE_QUESTION,
+            payload: {
+                id: 2,
+                question: 'New question',
+            }
+        };
+
+        const questions = newTestReducer(state, action).questions;
+
+        expect(questions).toEqual([
+            {id: 1, question: 'one'},
+            {id: 2, question: 'New question'},
+            {id: 3, question: 'three'}
+        ])
+    });
+
+    it('should remove question', () => {
+        const state = {
+            ...initialState.newTest,
+            questions: [
+                {id: 1, type: 'one'},
+                {id: 2, type: 'one'},
+                {id: 3, type: 'one'}
+            ]
+        };
+
+        const questionToRemove = state.questions[1];
+
+        const action = {
+            type: NEW_TEST.REMOVE_QUESTION,
+            payload: questionToRemove
+        };
+
+        const questions = newTestReducer(state, action).questions;
+
+        expect(questions).toEqual([{id: 1, type: 'one'}, {id: 3, type: 'one'}]);
     });
 
     it('should clean newTest state correctly', () => {

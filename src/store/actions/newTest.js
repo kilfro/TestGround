@@ -14,12 +14,25 @@ export function createUid(uid) {
     };
 }
 
-export function addQuestion(question) {
+export function addQuestion() {
     return {
-        type: NEW_TEST.ADD_QUESTION,
-        payload: {...question}
+        type: NEW_TEST.ADD_QUESTION
     };
 }
+
+export const changeQuestion = (question) => {
+    return {
+        type: NEW_TEST.CHANGE_QUESTION,
+        payload: question
+    }
+};
+
+export const removeQuestion = (question) => {
+    return {
+        type: NEW_TEST.REMOVE_QUESTION,
+        payload: question
+    }
+};
 
 export function cleanNewTestState() {
     return {

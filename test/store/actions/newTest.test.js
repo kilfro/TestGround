@@ -1,5 +1,12 @@
 import React from 'react';
-import {addQuestion, changeDescription, cleanNewTestState, createUid} from "../../../src/store/actions/newTest";
+import {
+    addQuestion,
+    changeDescription,
+    changeQuestion,
+    cleanNewTestState,
+    createUid,
+    removeQuestion
+} from "../../../src/store/actions/newTest";
 import {NEW_TEST} from "../../../src/store/actionTypes";
 
 describe('NewTest action creator', () => {
@@ -31,22 +38,23 @@ describe('NewTest action creator', () => {
         })
     });
 
+    it('should correctly create change question action', () => {
+        expect(changeQuestion({id: 100, type: 'one'})).toEqual({
+            type: NEW_TEST.CHANGE_QUESTION,
+            payload: {id: 100, type: 'one'}
+        })
+    });
+
+    it('should correctly create remove question action', () => {
+        expect(removeQuestion({id: 100, type: 'one'})).toEqual({
+            type: NEW_TEST.REMOVE_QUESTION,
+            payload: {id: 100, type: 'one'}
+        })
+    });
+
     it('should correctly create add question action', () => {
-        expect(addQuestion({
-            id: 10,
-            type: 'one',
-            cost: 10,
-            question: 'Question',
-            options: [{id: 1, text: 'Question text', isRight: true}]
-        })).toEqual({
-            type: NEW_TEST.ADD_QUESTION,
-            payload: {
-                id: 10,
-                type: 'one',
-                cost: 10,
-                question: 'Question',
-                options: [{id: 1, text: 'Question text', isRight: true}]
-            }
+        expect(addQuestion()).toEqual({
+            type: NEW_TEST.ADD_QUESTION
         })
     });
 
