@@ -17,7 +17,7 @@ export function createUid(uid) {
 export function addQuestion(question) {
     return {
         type: NEW_TEST.ADD_QUESTION,
-        payload: question
+        payload: {...question}
     };
 }
 

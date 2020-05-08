@@ -1,7 +1,7 @@
-import newTest from '../initialState';
+import initialTest from '../initialState';
 import {NEW_TEST} from "../actionTypes";
 
-export function newTestReducer(state = newTest, action) {
+export function newTestReducer(state = initialTest.newTest, action) {
     switch (action.type) {
         case (NEW_TEST.CHANGE_DESCRIPTION):
             return {
@@ -15,14 +15,14 @@ export function newTestReducer(state = newTest, action) {
             };
         case (NEW_TEST.ADD_QUESTION):
             let currentQuestions = state.questions;
-            currentQuestions.concat(action.payload);
+            const newQuestions = currentQuestions.concat(action.payload);
 
             return {
                 ...state,
-                questions: currentQuestions
+                questions: newQuestions
             };
         case (NEW_TEST.CLEAN_STATE):
-            return newTest;
+            return initialTest.newTest;
         default:
             return state;
     }
