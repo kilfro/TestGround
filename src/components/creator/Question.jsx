@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {Card, Checkbox, FormControlLabel, TextField} from "@material-ui/core";
 import '../../styles/component/creator/question.css';
 import {changeQuestion} from "../../store/actions/newTest";
+import QuestionOptions from "./QuestionOptions";
 
 const Question = (props) => {
-    const {id, multiple, cost, question} = props.question;
+    const {id, multiple, cost, question, options} = props.question;
     const {changeQuestion} = props;
 
     const changeHandler = (event) => {
@@ -26,7 +27,7 @@ const Question = (props) => {
     };
 
     return (
-        <Card className='create-question-card'>
+        <Card className={`create-question-card ${id % 2 === 0 ? 'gray-card' : ''}`}>
 
             <FormControlLabel
                 control={<Checkbox checked={multiple} onChange={changeHandler} id={'multiple'}/>}
@@ -40,6 +41,10 @@ const Question = (props) => {
             <h3>Вопрос:</h3>
             <TextField multiline rows={3} fullWidth id={'question'} value={question} onChange={changeHandler}/>
 
+            <h3>Ответы:</h3>
+            <span>Отметьте верные варианты</span>
+
+            <QuestionOptions options={options} multiple={multiple} questionId={id}/>
         </Card>
     )
 };

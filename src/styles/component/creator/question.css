@@ -1,9 +1,13 @@
 .create-question-card {
-    margin: .5em 0;
+    margin: .7em 0;
     padding: 1em;
 }
 
 .question-option {
     width: 45%;
     margin: 0 1em !important;
+}
+
+.gray-card {
+    background-color: rgba(204, 204, 204, 0.3) !important;
 }
