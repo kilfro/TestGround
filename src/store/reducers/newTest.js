@@ -17,6 +17,7 @@ export function newTestReducer(state = initialState.newTest, action) {
                 uid: action.payload
             };
         case (NEW_TEST.ADD_QUESTION):
+            //TODO: исправить - дублирование ID после удаления вопроса и добавления нового
             const id = state.questions.length + 1;
             const newQuestion = {
                 ...initialState.newTest.questions[0],

@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {changeQuestion} from "../../store/actions/newTest";
-import {Button, Checkbox, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {Button, Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@material-ui/core";
+import '../../styles/component/creator/questionOptions.css';
 
 const QuestionOptions = (props) => {
     const {options, multiple, questionId, changeQuestion} = props;
 
+    //TODO: исправить - доблирование id после удаления варианта и добавления нового
     const addOption = () => {
         const newId = options.length + 1;
 
@@ -83,25 +85,27 @@ const QuestionOptions = (props) => {
         return checkedId;
     };
 
+    //TODO: удаление вариантов
     return (<>
         {
             !multiple ?
                 <RadioGroup value={getRadioGroupValue(options)} onChange={handleRadioGroupChange}>
-                    {options.map(op => <div key={op.id}>
-                        <Radio color="primary" value={op.id} id={`isRight.${op.id}`}/>
-                        <TextField id={`text.${op.id}`} value={op.text} onChange={handleCheckBoxChange}/>
-                    </div>)
-                    }
+                    {options.map(op => <FormControlLabel
+                        value={op.id} key={op.id} className='option-label'
+                        control={<Radio color="primary" value={op.id} id={`isRight.${op.id}`}/>}
+                        label={<TextField id={`text.${op.id}`} value={op.text} fullWidth
+                                          onChange={handleCheckBoxChange}/>}/>
+                    )}
                 </RadioGroup>
                 : <>
-                    {options.map(op => <div key={op.id}>
-                        <Checkbox id={`isRight.${op.id}`} color="primary"
-                                  inputProps={{'aria-label': 'secondary checkbox'}}
-                                  value={op.isRight} onChange={handleCheckBoxChange}/>
-                        <TextField id={`text.${op.id}`} value={op.text}
-                                   onChange={handleCheckBoxChange}/>
-                    </div>)
-                    }
+                    {options.map(op => <FormControlLabel
+                        key={op.id} className='option-label'
+                        control={<Checkbox id={`isRight.${op.id}`} color="primary"
+                                           inputProps={{'aria-label': 'secondary checkbox'}}
+                                           value={op.isRight} onChange={handleCheckBoxChange}/>}
+                        label={<TextField id={`text.${op.id}`} value={op.text} fullWidth
+                                          onChange={handleCheckBoxChange}/>}/>
+                    )}
                 </>}
 
         <Button onClick={addOption}>Добавить вариант</Button>

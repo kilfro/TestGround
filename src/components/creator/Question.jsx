@@ -16,7 +16,8 @@ const Question = (props) => {
         if (target === 'multiple') {
             changeQuestion({
                 multiple: event.target.checked,
-                id
+                id,
+                options: resetIsRight()
             });
         } else {
             changeQuestion({
@@ -26,17 +27,26 @@ const Question = (props) => {
         }
     };
 
+    const resetIsRight = () => {
+        return options.map(op => {
+            op.isRight = false;
+            return op;
+        });
+    };
+
     return (
-        <Card className={`create-question-card ${id % 2 === 0 ? 'gray-card' : ''}`}>
+        <Card className={`create-question-card ${id % 2 !== 0 ? 'gray-card' : ''}`}>
 
-            <FormControlLabel
-                control={<Checkbox checked={multiple} onChange={changeHandler} id={'multiple'}/>}
-                label='Выбор нескольких вариантов ответов'
-                className='question-option'
-            />
+            <div className='container'>
+                <FormControlLabel
+                    control={<Checkbox checked={multiple} onChange={changeHandler} id={'multiple'} color='primary'/>}
+                    label='Выбор нескольких вариантов ответов'
+                    className='question-option'
+                />
 
-            <TextField id={'cost'} className='question-option' label={'Баллы за верный ответ'} type={'number'}
-                       inputProps={{min: 0, step: 1}} onChange={changeHandler} value={cost}/>
+                <TextField id={'cost'} className='question-option' label={'Баллы за верный ответ'} type={'number'}
+                           inputProps={{min: 0, step: 1}} onChange={changeHandler} value={cost}/>
+            </div>
 
             <h3>Вопрос:</h3>
             <TextField multiline rows={3} fullWidth id={'question'} value={question} onChange={changeHandler}/>

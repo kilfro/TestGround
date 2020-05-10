@@ -1,0 +1,8 @@
+.option-label {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.option-label span:last-child {
+    width: inherit;
+}
