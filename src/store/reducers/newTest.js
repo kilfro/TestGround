@@ -47,13 +47,13 @@ export function newTestReducer(state = initialState.newTest, action) {
                 questions: newQuestions
             };
         case (NEW_TEST.REMOVE_QUESTION):
-            const indexToRemove = state.questions.indexOf(action.payload);
+            let newQuestionsAfterRemove = [...state.questions];
+            newQuestionsAfterRemove = newQuestionsAfterRemove.filter(q => q.id !== action.payload.id);
 
-            if (indexToRemove >= 0) {
-                state.questions.splice(indexToRemove, 1);
-            }
-
-            return state;
+            return {
+                ...state,
+                questions: newQuestionsAfterRemove
+            };
         case (NEW_TEST.CLEAN_STATE):
             return initialState.newTest;
         default:

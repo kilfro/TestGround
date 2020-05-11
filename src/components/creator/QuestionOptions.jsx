@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {changeQuestion} from "../../store/actions/newTest";
-import {Button, Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@material-ui/core";
 import '../../styles/component/creator/questionOptions.css';
 
 const QuestionOptions = (props) => {
@@ -81,7 +81,6 @@ const QuestionOptions = (props) => {
             }
         });
 
-        console.log(checkedId);
         return checkedId;
     };
 
@@ -107,8 +106,6 @@ const QuestionOptions = (props) => {
                                           onChange={handleCheckBoxChange}/>}/>
                     )}
                 </>}
-
-        <Button onClick={addOption}>Добавить вариант</Button>
     </>)
 };
 

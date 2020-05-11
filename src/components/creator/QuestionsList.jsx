@@ -11,7 +11,7 @@ class QuestionsList extends React.Component {
 
         return (
             <>
-                {questions.map(q => <Question question={q} key={q.id}/>)}
+                {questions.map((q, index) => (<Question question={q} key={q.id} index={index}/>))}
                 <Button fullWidth id={'add_btn'} color={'primary'} variant={'contained'}
                         onClick={addQuestion}>
                     Добавить вопрос

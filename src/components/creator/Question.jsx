@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Checkbox, FormControlLabel, TextField} from "@material-ui/core";
+import {Button, Card, Checkbox, FormControlLabel, IconButton, TextField} from "@material-ui/core";
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import '../../styles/component/creator/question.css';
-import {changeQuestion} from "../../store/actions/newTest";
+import {changeQuestion, removeQuestion} from "../../store/actions/newTest";
 import QuestionOptions from "./QuestionOptions";
 
 const Question = (props) => {
     const {id, multiple, cost, question, options} = props.question;
-    const {changeQuestion} = props;
+    const {changeQuestion, removeQuestion, index} = props;
 
     const changeHandler = (event) => {
         const target = event.target.id;
@@ -34,8 +35,27 @@ const Question = (props) => {
         });
     };
 
+    //TODO: исправить - доблирование id после удаления варианта и добавления нового
+    const addOption = () => {
+        const newId = options.length + 1;
+
+        changeQuestion({
+            id: id,
+            options: options.concat({
+                id: newId,
+                text: '',
+                isRight: false
+            })
+        });
+    };
+
+    const deleteQuestion = () => {
+        removeQuestion(props.question);
+    };
+
+    console.log(index);
     return (
-        <Card className={`create-question-card ${id % 2 !== 0 ? 'gray-card' : ''}`}>
+        <Card className={`create-question-card ${index % 2 !== 0 ? 'gray-card' : ''}`}>
 
             <div className='container'>
                 <FormControlLabel
@@ -55,12 +75,20 @@ const Question = (props) => {
             <span>Отметьте верные варианты</span>
 
             <QuestionOptions options={options} multiple={multiple} questionId={id}/>
+
+            <div>
+                <Button onClick={addOption} variant='outlined' color='primary'>Добавить вариант</Button>
+                <IconButton variant='outlined' color='secondary' title='Удалить вопрос' onClick={deleteQuestion}>
+                    <DeleteForeverIcon fontSize='large'/>
+                </IconButton>
+            </div>
         </Card>
     )
 };
 
 const mapDispatchToProps = {
-    changeQuestion
+    changeQuestion,
+    removeQuestion
 };
 
 export default connect(null, mapDispatchToProps)(Question);
