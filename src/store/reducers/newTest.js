@@ -1,5 +1,6 @@
 import initialState from '../initialState';
 import {NEW_TEST} from "../actionTypes";
+import {getNextId} from "../../components/supporting/Functions";
 
 export function newTestReducer(state = initialState.newTest, action) {
     switch (action.type) {
@@ -17,8 +18,7 @@ export function newTestReducer(state = initialState.newTest, action) {
                 uid: action.payload
             };
         case (NEW_TEST.ADD_QUESTION):
-            //TODO: исправить - дублирование ID после удаления вопроса и добавления нового
-            const id = state.questions.length + 1;
+            const id = getNextId(state.questions);
             const newQuestion = {
                 ...initialState.newTest.questions[0],
                 id
@@ -47,8 +47,9 @@ export function newTestReducer(state = initialState.newTest, action) {
                 questions: newQuestions
             };
         case (NEW_TEST.REMOVE_QUESTION):
+            const idToRemove = action.payload;
             let newQuestionsAfterRemove = [...state.questions];
-            newQuestionsAfterRemove = newQuestionsAfterRemove.filter(q => q.id !== action.payload.id);
+            newQuestionsAfterRemove = newQuestionsAfterRemove.filter(q => q.id !== idToRemove);
 
             return {
                 ...state,

@@ -27,10 +27,10 @@ export const changeQuestion = (question) => {
     }
 };
 
-export const removeQuestion = (question) => {
+export const removeQuestion = (id) => {
     return {
         type: NEW_TEST.REMOVE_QUESTION,
-        payload: question
+        payload: id
     }
 };
 

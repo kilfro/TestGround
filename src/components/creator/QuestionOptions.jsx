@@ -2,25 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {changeQuestion} from "../../store/actions/newTest";
-import {Checkbox, FormControlLabel, Radio, RadioGroup, TextField} from "@material-ui/core";
+import {RadioGroup} from "@material-ui/core";
 import '../../styles/component/creator/questionOptions.css';
+import RadioOption from "./RadioOption";
+import CheckboxOption from "./CheckboxOption";
 
 const QuestionOptions = (props) => {
     const {options, multiple, questionId, changeQuestion} = props;
-
-    //TODO: исправить - доблирование id после удаления варианта и добавления нового
-    const addOption = () => {
-        const newId = options.length + 1;
-
-        changeQuestion({
-            id: questionId,
-            options: options.concat({
-                id: newId,
-                text: '',
-                isRight: false
-            })
-        });
-    };
 
     const handleCheckBoxChange = (event) => {
         let options = [...props.options];
@@ -84,29 +72,31 @@ const QuestionOptions = (props) => {
         return checkedId;
     };
 
-    //TODO: удаление вариантов
-    return (<>
-        {
-            !multiple ?
-                <RadioGroup value={getRadioGroupValue(options)} onChange={handleRadioGroupChange}>
-                    {options.map(op => <FormControlLabel
-                        value={op.id} key={op.id} className='option-label'
-                        control={<Radio color="primary" value={op.id} id={`isRight.${op.id}`}/>}
-                        label={<TextField id={`text.${op.id}`} value={op.text} fullWidth
-                                          onChange={handleCheckBoxChange}/>}/>
-                    )}
-                </RadioGroup>
-                : <>
-                    {options.map(op => <FormControlLabel
-                        key={op.id} className='option-label'
-                        control={<Checkbox id={`isRight.${op.id}`} color="primary"
-                                           inputProps={{'aria-label': 'secondary checkbox'}}
-                                           value={op.isRight} onChange={handleCheckBoxChange}/>}
-                        label={<TextField id={`text.${op.id}`} value={op.text} fullWidth
-                                          onChange={handleCheckBoxChange}/>}/>
-                    )}
-                </>}
-    </>)
+    const removeOption = (event) => {
+        const id = event.target.id;
+        let newOptions = [...options];
+        newOptions = newOptions.filter(op => String(op.id) !== String(id));
+
+        changeQuestion({
+            id: questionId,
+            options: newOptions
+        });
+    };
+
+    return (
+        <>{
+              !multiple ?
+                  <RadioGroup value={getRadioGroupValue(options)} onChange={handleRadioGroupChange}>
+                      {options.map(op =>
+                          <RadioOption option={op} handleChange={handleCheckBoxChange} remove={removeOption}
+                                       key={op.id}/>
+                      )}
+                  </RadioGroup>
+                  : <>
+                      {options.map(op => <CheckboxOption option={op} handleChange={handleCheckBoxChange}
+                                                         remove={removeOption} key={op.id}/>)}
+                  </>
+          }</>)
 };
 
 QuestionOptions.propTypes = {

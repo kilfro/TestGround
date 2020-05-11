@@ -5,6 +5,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import '../../styles/component/creator/question.css';
 import {changeQuestion, removeQuestion} from "../../store/actions/newTest";
 import QuestionOptions from "./QuestionOptions";
+import {getNextId} from "../supporting/Functions";
 
 const Question = (props) => {
     const {id, multiple, cost, question, options} = props.question;
@@ -35,29 +36,23 @@ const Question = (props) => {
         });
     };
 
-    //TODO: исправить - доблирование id после удаления варианта и добавления нового
     const addOption = () => {
-        const newId = options.length + 1;
+        const newId = getNextId(options);
 
         changeQuestion({
             id: id,
-            options: options.concat({
-                id: newId,
-                text: '',
-                isRight: false
-            })
+            options: options.concat({id: newId, text: '', isRight: false})
         });
     };
 
     const deleteQuestion = () => {
-        removeQuestion(props.question);
+        removeQuestion(id);
     };
 
-    console.log(index);
     return (
         <Card className={`create-question-card ${index % 2 !== 0 ? 'gray-card' : ''}`}>
 
-            <div className='container'>
+            <div className='type-cost-container'>
                 <FormControlLabel
                     control={<Checkbox checked={multiple} onChange={changeHandler} id={'multiple'} color='primary'/>}
                     label='Выбор нескольких вариантов ответов'

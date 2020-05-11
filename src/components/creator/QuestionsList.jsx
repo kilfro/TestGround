@@ -5,21 +5,19 @@ import {connect} from 'react-redux';
 import {addQuestion} from "../../store/actions/newTest";
 import '../../styles/component/creator/questions-list.css';
 
-class QuestionsList extends React.Component {
-    render() {
-        const {questions, addQuestion} = this.props;
+const QuestionsList = (props) => {
+    const {questions, addQuestion} = props;
 
-        return (
-            <>
-                {questions.map((q, index) => (<Question question={q} key={q.id} index={index}/>))}
-                <Button fullWidth id={'add_btn'} color={'primary'} variant={'contained'}
-                        onClick={addQuestion}>
-                    Добавить вопрос
-                </Button>
-            </>
-        );
-    }
-}
+    return (
+        <>
+            {questions.map((q, index) => (<Question question={q} key={q.id} index={index}/>))}
+            <Button fullWidth id={'add_btn'} color={'primary'} variant={'contained'}
+                    onClick={addQuestion}>
+                Добавить вопрос
+            </Button>
+        </>
+    );
+};
 
 const mapStateToProps = (state) => {
     return {
