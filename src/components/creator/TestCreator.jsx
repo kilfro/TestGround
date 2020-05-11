@@ -4,6 +4,9 @@ import '../../styles/component/creator/testcreator.css';
 import TabPanel from "../supporting/TabPanel";
 import TestDescription from "./TestDescription";
 import QuestionsList from "./QuestionsList";
+import {createUid} from "../../store/actions/newTest";
+import {connect} from 'react-redux';
+import {v4 as getUID} from 'uuid';
 
 class TestCreator extends React.Component {
     constructor(props) {
@@ -11,6 +14,10 @@ class TestCreator extends React.Component {
         this.state = {
             tabPosition: 0
         };
+    }
+
+    componentDidMount() {
+        this.props.createUid(getUID());
     }
 
     getTabProps = (index) => {
@@ -22,14 +29,6 @@ class TestCreator extends React.Component {
 
     handleChangeTab = (event, newValue) => {
         this.setState({tabPosition: newValue})
-    };
-
-    createNewQuestion = () => {
-        this.setState((prev) => {
-            return {
-                questions: prev.questions.concat({})
-            }
-        })
     };
 
     render() {
@@ -56,4 +55,8 @@ class TestCreator extends React.Component {
     }
 }
 
-export default TestCreator;
+const mapDispatchToProps = {
+    createUid
+};
+
+export default connect(null, mapDispatchToProps)(TestCreator);
