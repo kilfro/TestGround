@@ -106,11 +106,9 @@ describe('NewTest reducer', () => {
             ]
         };
 
-        const questionToRemove = state.questions[1];
-
         const action = {
             type: NEW_TEST.REMOVE_QUESTION,
-            payload: questionToRemove
+            payload: 2
         };
 
         const questions = newTestReducer(state, action).questions;
