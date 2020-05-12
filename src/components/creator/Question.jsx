@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button, Card, Checkbox, FormControlLabel, TextField} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -50,7 +51,7 @@ const Question = (props) => {
     };
 
     const selfCheck = () => {
-        if (question === '') {
+        if (!question || question === '') {
             return false;
         }
 
@@ -91,7 +92,7 @@ const Question = (props) => {
             <QuestionOptions options={options} multiple={multiple} questionId={id}/>
 
             <div className='button-group'>
-                <Button onClick={addOption} variant='outlined' color='primary'>Добавить вариант</Button>
+                <Button onClick={addOption} variant='outlined' color='primary' id='add_option'>Добавить вариант</Button>
                 <Button variant="contained" color="secondary" startIcon={<DeleteForeverIcon/>}
                         onClick={deleteQuestion} className='delete-question-btn'>
                     Удалить вопрос
@@ -99,6 +100,11 @@ const Question = (props) => {
             </div>
         </Card>
     )
+};
+
+Question.propTypes = {
+    question: PropTypes.object.isRequired,
+    index: PropTypes.number
 };
 
 const mapDispatchToProps = {
