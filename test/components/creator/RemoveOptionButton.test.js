@@ -5,10 +5,6 @@ describe('RemoveOptionButton', () => {
     const remove = jest.fn();
     const wrapper = mount(<RemoveOptionButton id={10} remove={remove}/>);
 
-    it('should render correctly', () => {
-        expect(wrapper).toMatchSnapshot();
-    });
-
     it('should get props', () => {
         expect(wrapper.props().id).toEqual(10);
         expect(wrapper.props().remove).toEqual(remove);
