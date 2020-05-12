@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Checkbox, FormControlLabel, TextField} from "@material-ui/core";
 import '../../styles/component/creator/questionOptions.css';
 import RemoveOptionButton from "./RemoveOptionButton";
@@ -18,6 +19,12 @@ const CheckboxOption = (props) => {
             }
         />
     );
+};
+
+CheckboxOption.propTypes = {
+    option: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
 };
 
 export default CheckboxOption;
