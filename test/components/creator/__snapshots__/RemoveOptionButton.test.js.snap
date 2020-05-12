@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RemoveOptionButton should render correctly 1`] = `
+<RemoveOptionButton
+  id={10}
+  remove={[MockFunction]}
+>
+  <WithStyles(ForwardRef(InputAdornment))
+    position="end"
+  >
+    <ForwardRef(InputAdornment)
+      classes={
+        Object {
+          "disablePointerEvents": "MuiInputAdornment-disablePointerEvents",
+          "filled": "MuiInputAdornment-filled",
+          "hiddenLabel": "MuiInputAdornment-hiddenLabel",
+          "marginDense": "MuiInputAdornment-marginDense",
+          "positionEnd": "MuiInputAdornment-positionEnd",
+          "positionStart": "MuiInputAdornment-positionStart",
+          "root": "MuiInputAdornment-root",
+        }
+      }
+      position="end"
+    >
+      <div
+        className="MuiInputAdornment-root MuiInputAdornment-positionEnd"
+      >
+        <ForwardRef
+          className="remove-icon"
+          id={10}
+          onClick={[MockFunction]}
+        >
+          <WithStyles(ForwardRef(SvgIcon))
+            className="remove-icon"
+            id={10}
+            onClick={[MockFunction]}
+          >
+            <ForwardRef(SvgIcon)
+              className="remove-icon"
+              classes={
+                Object {
+                  "colorAction": "MuiSvgIcon-colorAction",
+                  "colorDisabled": "MuiSvgIcon-colorDisabled",
+                  "colorError": "MuiSvgIcon-colorError",
+                  "colorPrimary": "MuiSvgIcon-colorPrimary",
+                  "colorSecondary": "MuiSvgIcon-colorSecondary",
+                  "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                  "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                  "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                  "root": "MuiSvgIcon-root",
+                }
+              }
+              id={10}
+              onClick={[MockFunction]}
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root remove-icon"
+                focusable="false"
+                id={10}
+                onClick={[MockFunction]}
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 11v2h10v-2H7zm5-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                />
+              </svg>
+            </ForwardRef(SvgIcon)>
+          </WithStyles(ForwardRef(SvgIcon))>
+        </ForwardRef>
+      </div>
+    </ForwardRef(InputAdornment)>
+  </WithStyles(ForwardRef(InputAdornment))>
+</RemoveOptionButton>
+`;
