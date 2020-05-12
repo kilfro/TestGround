@@ -1,0 +1,33 @@
+import React from 'react';
+import RadioOption from '../../../src/components/creator/RadioOption';
+
+describe('RadioOption', () => {
+    const handleFunc = jest.fn();
+    const removeFunc = jest.fn();
+    const option = {
+        id: 1,
+        text: 'Text',
+        isRight: true
+    };
+
+    const wrapper = mount(<RadioOption option={option} handleChange={handleFunc} remove={removeFunc}/>);
+
+    it('should render correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should show option text', () => {
+        const input = wrapper.find('input[type="text"]');
+        expect(input.props().value).toEqual('Text');
+    });
+
+    it('should call remove function', () => {
+        wrapper.find('svg.remove-icon').simulate('click');
+        expect(removeFunc).toHaveBeenCalled();
+    });
+
+    it('should call change function', () => {
+        wrapper.find('input[type="text"]').simulate('change', 'New');
+        expect(handleFunc).toHaveBeenCalled();
+    });
+});
