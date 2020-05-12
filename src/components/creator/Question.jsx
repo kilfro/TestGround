@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Card, Checkbox, FormControlLabel, IconButton, TextField} from "@material-ui/core";
+import {Button, Card, Checkbox, FormControlLabel, TextField} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import '../../styles/component/creator/question.css';
 import {changeQuestion, removeQuestion} from "../../store/actions/newTest";
@@ -49,8 +49,27 @@ const Question = (props) => {
         removeQuestion(id);
     };
 
+    const selfCheck = () => {
+        if (question === '') {
+            return false;
+        }
+
+        const emptyOptions = options.filter(op => op.text === '');
+        if (emptyOptions.length !== 0) {
+            return false;
+        }
+
+        const correctAnswers = options.filter(op => op.isRight === true);
+        if (correctAnswers.length === 0) {
+            return false;
+        }
+
+        return true;
+    };
+
     return (
-        <Card className={`create-question-card ${index % 2 !== 0 ? 'gray-card' : ''}`}>
+        <Card className={`create-question-card ${index % 2 !== 0 ? 'gray-card' : ''}
+                          self-check-${selfCheck() ? 'green' : 'red'}`}>
 
             <div className='type-cost-container'>
                 <FormControlLabel
@@ -67,15 +86,16 @@ const Question = (props) => {
             <TextField multiline rows={3} fullWidth id={'question'} value={question} onChange={changeHandler}/>
 
             <h3>Ответы:</h3>
-            <span>Отметьте верные варианты</span>
+            <span className='small-comment'>Отметьте верные варианты</span>
 
             <QuestionOptions options={options} multiple={multiple} questionId={id}/>
 
-            <div>
+            <div className='button-group'>
                 <Button onClick={addOption} variant='outlined' color='primary'>Добавить вариант</Button>
-                <IconButton variant='outlined' color='secondary' title='Удалить вопрос' onClick={deleteQuestion}>
-                    <DeleteForeverIcon fontSize='large'/>
-                </IconButton>
+                <Button variant="contained" color="secondary" startIcon={<DeleteForeverIcon/>}
+                        onClick={deleteQuestion} className='delete-question-btn'>
+                    Удалить вопрос
+                </Button>
             </div>
         </Card>
     )

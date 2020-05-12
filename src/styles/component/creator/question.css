@@ -12,3 +12,30 @@
 .gray-card {
     background-color: rgba(204, 204, 204, 0.3) !important;
 }
+
+.small-comment {
+    font-size: smaller;
+}
+
+.button-group {
+    margin-top: .5em;
+}
+
+.delete-question-btn {
+    float: right;
+    background-color: rgba(245, 0, 87, 0.67) !important;
+}
+
+.delete-question-btn:hover {
+    background-color: rgba(245, 0, 87, 1) !important;
+
+}
+
+.self-check-green {
+    border-left: green solid 3px;
+}
+
+.self-check-red {
+    border-left: red solid 3px;
+
+}
