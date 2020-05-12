@@ -6,6 +6,7 @@ import {RadioGroup} from "@material-ui/core";
 import '../../styles/component/creator/questionOptions.css';
 import RadioOption from "./RadioOption";
 import CheckboxOption from "./CheckboxOption";
+import {getRadioGroupValue} from '../supporting/Functions';
 
 const QuestionOptions = (props) => {
     const {options, multiple, questionId, changeQuestion} = props;
@@ -58,18 +59,6 @@ const QuestionOptions = (props) => {
             id: questionId,
             options: newOptions
         });
-    };
-
-    const getRadioGroupValue = (options) => {
-        let checkedId = -1;
-
-        options.map(op => {
-            if (op.isRight) {
-                checkedId = op.id;
-            }
-        });
-
-        return checkedId;
     };
 
     const removeOption = (event) => {

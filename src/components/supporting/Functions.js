@@ -11,3 +11,15 @@ export const getNextId = (array) => {
     const maxId = Math.max.apply(Math, array.map(item => item.id));
     return maxId + 1;
 };
+
+export const getRadioGroupValue = (options) => {
+    let checkedId = -1;
+
+    options.map(op => {
+        if (op.isRight) {
+            checkedId = op.id;
+        }
+    });
+
+    return checkedId;
+};
