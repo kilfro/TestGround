@@ -1,11 +1,14 @@
 import React from 'react';
 import {
     addQuestion,
+    addResult,
     changeDescription,
     changeQuestion,
+    changeResult,
     cleanNewTestState,
     createUid,
-    removeQuestion
+    removeQuestion,
+    removeResult
 } from "../../../src/store/actions/newTest";
 import {NEW_TEST} from "../../../src/store/actionTypes";
 
@@ -61,6 +64,38 @@ describe('NewTest action creator', () => {
     it('should correctly create clean newTest state action', () => {
         expect(cleanNewTestState()).toEqual({
             type: NEW_TEST.CLEAN_STATE
+        })
+    });
+
+    it('should correctly create add new result action', () => {
+        expect(addResult()).toEqual({
+            type: NEW_TEST.ADD_RESULT
+        });
+    });
+
+    it('should correctly create change result action', () => {
+        const res = {
+            id: 1,
+            min: 0,
+            max: 100,
+            text: 'Result'
+        };
+
+        expect(changeResult(res)).toEqual({
+            type: NEW_TEST.CHANGE_RESULT,
+            payload: {
+                id: 1,
+                min: 0,
+                max: 100,
+                text: 'Result'
+            }
+        })
+    });
+
+    it('should correctly create remove result action', () => {
+        expect(removeResult(100)).toEqual({
+            type: NEW_TEST.REMOVE_RESULT,
+            payload: 100
         })
     });
 });
