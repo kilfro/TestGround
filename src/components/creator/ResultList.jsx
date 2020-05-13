@@ -11,7 +11,8 @@ const ResultList = (props) => {
     return (
         <>
             {results.map(res => <ResultDescription result={res} key={res.id}/>)}
-            <Button fullWidth variant={'outlined'} color={'primary'} onClick={addResult}>Добавить результат</Button>
+            <Button fullWidth variant={'outlined'} color={'primary'} onClick={addResult} id={'add-btn'}>Добавить
+                результат</Button>
         </>
     );
 };
