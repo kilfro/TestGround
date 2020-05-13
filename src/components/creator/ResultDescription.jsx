@@ -1,10 +1,12 @@
 import React from 'react';
 import {Button, Card, TextField} from '@material-ui/core';
+import {connect} from 'react-redux';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import '../../styles/component/creator/resultDescription.css';
+import {removeResult} from "../../store/actions/newTest";
 
 const ResultDescription = (props) => {
-    const {id, min, max, text} = props;
+    const {id, min, max, text, removeResult} = props;
 
     return (
         <Card className='result-card'>
@@ -17,7 +19,7 @@ const ResultDescription = (props) => {
                     <TextField id={'max'} type={'number'} inputProps={{min: 0, step: 1}} value={max}
                                className='period-field'/>
                 </div>
-                <Button className='remove-btn'><HighlightOffIcon/></Button>
+                <Button className='remove-btn' onClick={() => removeResult(id)}><HighlightOffIcon/></Button>
             </div>
             <h3>Описание:</h3>
             <TextField multiline rows={3} fullWidth id={'text'} value={text}/>
@@ -25,4 +27,8 @@ const ResultDescription = (props) => {
     )
 };
 
-export default ResultDescription;
+const mapDispatchToProps = {
+    removeResult
+};
+
+export default connect(null, mapDispatchToProps)(ResultDescription);
