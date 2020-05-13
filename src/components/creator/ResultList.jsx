@@ -10,7 +10,7 @@ const ResultList = (props) => {
 
     return (
         <>
-            {results.map(res => <ResultDescription {...res} key={res.id}/>)}
+            {results.map(res => <ResultDescription result={res} key={res.id}/>)}
             <Button fullWidth variant={'outlined'} color={'primary'} onClick={addResult}>Добавить результат</Button>
         </>
     );
