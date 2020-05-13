@@ -55,6 +55,31 @@ export function newTestReducer(state = initialState.newTest, action) {
                 ...state,
                 questions: newQuestionsAfterRemove
             };
+        case (NEW_TEST.ADD_RESULT):
+            return {
+                ...state,
+                resultDescriptions: state.resultDescriptions.concat(initialState.newTest.resultDescriptions)
+            };
+        case (NEW_TEST.CHANGE_RESULT):
+            const changedResult = action.payload;
+            const changedResults = state.resultDescriptions.map(res => {
+                if (res.id === changedResult.id) {
+                    return changedResult;
+                }
+
+                return res;
+            });
+
+            return {
+                ...state,
+                resultDescriptions: changedResults
+            };
+        case (NEW_TEST.REMOVE_RESULT):
+            const resultId = action.payload;
+            return {
+                ...state,
+                resultDescriptions: state.resultDescriptions.filter(res => res !== resultId)
+            };
         case (NEW_TEST.CLEAN_STATE):
             return initialState.newTest;
         default:

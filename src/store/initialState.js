@@ -31,6 +31,14 @@ export default {
                     }
                 ]
             }
+        ],
+        resultDescriptions: [
+            {
+                id: 1,
+                min: 0,
+                max: 0,
+                text: ''
+            }
         ]
     }
 };

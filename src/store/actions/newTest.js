@@ -1,24 +1,24 @@
 import {NEW_TEST} from '../actionTypes';
 
-export function changeDescription(description) {
+export const changeDescription = (description) => {
     return {
         type: NEW_TEST.CHANGE_DESCRIPTION,
         payload: {...description}
     };
-}
+};
 
-export function createUid(uid) {
+export const createUid = (uid) => {
     return {
         type: NEW_TEST.CREATE_UID,
         payload: uid
     };
-}
+};
 
-export function addQuestion() {
+export const addQuestion = () => {
     return {
         type: NEW_TEST.ADD_QUESTION
     };
-}
+};
 
 export const changeQuestion = (question) => {
     return {
@@ -34,8 +34,28 @@ export const removeQuestion = (id) => {
     }
 };
 
-export function cleanNewTestState() {
+export const cleanNewTestState = () => {
     return {
         type: NEW_TEST.CLEAN_STATE
     };
-}
+};
+
+export const addResult = () => {
+    return {
+        type: NEW_TEST.ADD_RESULT
+    }
+};
+
+export const changeResult = (result) => {
+    return {
+        type: NEW_TEST.CHANGE_RESULT,
+        payload: result
+    }
+};
+
+export const removeResult = (id) => {
+    return {
+        type: NEW_TEST.REMOVE_RESULT,
+        payload: id
+    }
+};
