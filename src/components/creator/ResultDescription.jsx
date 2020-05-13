@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button, Card, TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
@@ -35,6 +36,10 @@ const ResultDescription = (props) => {
             <TextField multiline rows={3} fullWidth id={'text'} value={text} onChange={changeHandler}/>
         </Card>
     )
+};
+
+ResultDescription.propTypes = {
+    result: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = {
