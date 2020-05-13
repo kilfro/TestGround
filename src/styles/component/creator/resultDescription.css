@@ -1,0 +1,32 @@
+.result-card {
+    margin: .5em 0;
+    padding: 1em;
+}
+
+h3 {
+    margin-top: .5em;
+}
+
+.card-header {
+    display: grid;
+    grid-template-columns: 2fr auto;
+}
+
+.period {
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+}
+
+.period span {
+    padding-bottom: .5em;
+}
+
+.period-field {
+    padding: 0 1em !important;
+    width: 5em;
+}
+
+.remove-btn:hover {
+    color: #cc0000;
+}
