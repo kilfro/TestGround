@@ -56,9 +56,13 @@ export function newTestReducer(state = initialState.newTest, action) {
                 questions: newQuestionsAfterRemove
             };
         case (NEW_TEST.ADD_RESULT):
+            const newResult = {
+                ...initialState.newTest.resultDescriptions,
+                id: getNextId(state.resultDescriptions)
+            };
             return {
                 ...state,
-                resultDescriptions: state.resultDescriptions.concat(initialState.newTest.resultDescriptions)
+                resultDescriptions: state.resultDescriptions.concat(newResult)
             };
         case (NEW_TEST.CHANGE_RESULT):
             const changedResult = action.payload;
@@ -78,7 +82,7 @@ export function newTestReducer(state = initialState.newTest, action) {
             const resultId = action.payload;
             return {
                 ...state,
-                resultDescriptions: state.resultDescriptions.filter(res => res !== resultId)
+                resultDescriptions: state.resultDescriptions.filter(res => res.id !== resultId)
             };
         case (NEW_TEST.CLEAN_STATE):
             return initialState.newTest;

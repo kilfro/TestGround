@@ -1,12 +1,13 @@
 import React from 'react';
 import {Container, Tab, Tabs} from "@material-ui/core";
+import {connect} from 'react-redux';
+import {v4 as getUID} from 'uuid';
 import '../../styles/component/creator/testcreator.css';
+import {createUid} from "../../store/actions/newTest";
 import TabPanel from "../supporting/TabPanel";
 import TestDescription from "./TestDescription";
 import QuestionsList from "./QuestionsList";
-import {createUid} from "../../store/actions/newTest";
-import {connect} from 'react-redux';
-import {v4 as getUID} from 'uuid';
+import ResultList from "./ResultList";
 
 class TestCreator extends React.Component {
     constructor(props) {
@@ -49,7 +50,9 @@ class TestCreator extends React.Component {
                 <TabPanel tabPosition={tabPosition} index={1}>
                     <QuestionsList/>
                 </TabPanel>
-                <TabPanel tabPosition={tabPosition} index={2}>There will be results description here.</TabPanel>
+                <TabPanel tabPosition={tabPosition} index={2}>
+                    <ResultList/>
+                </TabPanel>
             </Container>
         )
     }

@@ -132,4 +132,37 @@ describe('NewTest reducer', () => {
 
         expect(newTestReducer(state, {type: NEW_TEST.CLEAN_STATE})).toEqual(initialState.newTest);
     });
+
+    it('should add new result description', () => {
+        const returnedState = newTestReducer(initialState.newTest, {type: NEW_TEST.ADD_RESULT});
+
+        expect(returnedState.resultDescriptions.length).toEqual(2);
+    });
+
+    it('should change result', () => {
+        const newResult = {
+            id: 1,
+            min: 10,
+            max: 20,
+            text: 'Result'
+        };
+        const returnedState = newTestReducer(initialState.newTest, {type: NEW_TEST.CHANGE_RESULT, payload: newResult});
+
+        expect(returnedState.resultDescriptions[0]).toEqual(newResult);
+    });
+
+    it('should remove result description', () => {
+        const initState = {
+            ...initialState.newTest,
+            resultDescriptions: [
+                {id: 1},
+                {id: 2},
+                {id: 3}
+            ]
+        };
+        const returnedState = newTestReducer(initState, {type: NEW_TEST.REMOVE_RESULT, payload: 2});
+
+        expect(returnedState.resultDescriptions.length).toEqual(2);
+        expect(returnedState.resultDescriptions).toEqual([{id: 1}, {id: 3}]);
+    });
 });
