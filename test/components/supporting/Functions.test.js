@@ -1,4 +1,4 @@
-import {getNextId, getRadioGroupValue} from "../../../src/components/supporting/Functions";
+import {checkQuestion, getNextId, getRadioGroupValue} from "../../../src/components/supporting/Functions";
 
 describe('getNextId', () => {
     it('should return ID if array is empty', () => {
@@ -29,5 +29,72 @@ describe('getRadioGroupValue', () => {
             {id: 2, isRight: true},
             {id: 3, isRight: false}
         ])).toEqual(2);
+    });
+});
+
+describe('checkQuestion', () => {
+    it('should return \'false\' if question is empty', () => {
+        const question = {
+            question: '',
+            needPassword: false,
+            options: [
+                {isRight: true, text: 'Option'}
+            ]
+        };
+
+        expect(checkQuestion(question)).toEqual(false);
+    });
+
+    it('should return \'false\' if question doesn\'t have right option', () => {
+        const question = {
+            question: 'Question',
+            needPassword: false,
+            options: [
+                {isRight: false, text: 'Option1'},
+                {isRight: false, text: 'Option2'}
+            ]
+        };
+
+        expect(checkQuestion(question)).toEqual(false);
+    });
+
+    it('should return \'false\' if at least one question doesn\'t text', () => {
+        const question = {
+            question: 'Question',
+            needPassword: false,
+            options: [
+                {isRight: true, text: ''},
+                {isRight: false, text: 'Option2'}
+            ]
+        };
+
+        expect(checkQuestion(question)).toEqual(false);
+    });
+
+    it('should return \'false\' if question needs password, but there is not it', () => {
+        const question = {
+            question: 'Question',
+            needPassword: true,
+            options: [
+                {isRight: true, text: ''},
+                {isRight: false, text: 'Option2'}
+            ]
+        };
+
+        expect(checkQuestion(question)).toEqual(false);
+    });
+
+    it('should return \'true\' if all is well', () => {
+        const question = {
+            question: 'Question',
+            needPassword: true,
+            password: 'password',
+            options: [
+                {isRight: true, text: 'Option1'},
+                {isRight: false, text: 'Option2'}
+            ]
+        };
+
+        expect(checkQuestion(question)).toEqual(true);
     });
 });
