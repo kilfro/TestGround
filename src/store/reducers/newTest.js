@@ -1,6 +1,6 @@
 import initialState from '../initialState';
 import {NEW_TEST} from "../actionTypes";
-import {getNextId} from "../../components/supporting/Functions";
+import {checkQuestion, getNextId} from "../../components/supporting/Functions";
 
 export function newTestReducer(state = initialState.newTest, action) {
     switch (action.type) {
@@ -33,9 +33,14 @@ export function newTestReducer(state = initialState.newTest, action) {
 
             const newQuestions = state.questions.map(q => {
                 if (q.id === changedQuestion.id) {
-                    return {
+                    const newQuestion = {
                         ...q,
                         ...changedQuestion
+                    };
+
+                    return {
+                        ...newQuestion,
+                        isRight: checkQuestion(newQuestion)
                     }
                 }
 

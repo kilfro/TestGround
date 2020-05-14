@@ -9,7 +9,7 @@ import QuestionOptions from "./QuestionOptions";
 import {getNextId} from "../supporting/Functions";
 
 const Question = (props) => {
-    const {id, multiple, cost, question, options} = props.question;
+    const {id, multiple, cost, question, options, isRight} = props.question;
     const {changeQuestion, removeQuestion, index} = props;
 
     const changeHandler = (event) => {
@@ -50,27 +50,9 @@ const Question = (props) => {
         removeQuestion(id);
     };
 
-    const selfCheck = () => {
-        if (!question || question === '') {
-            return false;
-        }
-
-        const emptyOptions = options.filter(op => op.text === '');
-        if (emptyOptions.length !== 0) {
-            return false;
-        }
-
-        const correctAnswers = options.filter(op => op.isRight === true);
-        if (correctAnswers.length === 0) {
-            return false;
-        }
-
-        return true;
-    };
-
     return (
         <Card className={`create-question-card ${index % 2 !== 0 ? 'gray-card' : ''}
-                          self-check-${selfCheck() ? 'green' : 'red'}`}>
+                          self-check-${isRight ? 'green' : 'red'}`}>
 
             <div className='type-cost-container'>
                 <FormControlLabel

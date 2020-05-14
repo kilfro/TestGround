@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormControlLabel, InputAdornment, Switch, TextField} from "@material-ui/core";
+import {Button, FormControlLabel, InputAdornment, Switch, TextField} from "@material-ui/core";
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import * as generator from "generate-password/src/generate";
 import '../../styles/component/creator/testcreator.css';
@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 const TestDescription = (props) => {
     const {name, additional, anonymous, onlyRegistered, needPassword, password} = props.description;
-    const {changeDescription} = props;
+    const {changeDescription, nextTab} = props;
 
     const generatePassword = () => {
         const generated = generator.generate({
@@ -35,6 +35,18 @@ const TestDescription = (props) => {
         };
 
         changeDescription(newDescription);
+    };
+
+    const selfCheck = () => {
+        if (!name || name.trim() === '') {
+            return false;
+        }
+
+        if (needPassword && (!password || password.trim() === '')) {
+            return false;
+        }
+
+        return true;
     };
 
     return (
@@ -83,6 +95,10 @@ const TestDescription = (props) => {
                            }}
                 />
             </>}
+
+            <div className='navigate-btn'>
+                <Button onClick={nextTab} color={'primary'} variant={'contained'} disabled={!selfCheck()}>Далее</Button>
+            </div>
         </>
     );
 };

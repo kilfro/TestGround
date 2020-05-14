@@ -89,9 +89,10 @@ describe('Question', () => {
         })
     });
 
-    it('should do self-check', () => {
+    it('should use check information', () => {
         let wrapper = mountWithProps({
             id: 1,
+            isRight: false,
             question: '',
             multiple: false,
             options: [{id: 1, text: '', isRight: false}]
@@ -102,33 +103,7 @@ describe('Question', () => {
 
         wrapper = mountWithProps({
             id: 1,
-            question: 'Question?',
-            multiple: false,
-            options: [{id: 1, text: '', isRight: false}]
-        }, 0);
-        expect(wrapper.find('.self-check-green').length).toEqual(0);
-        expect(wrapper.find('.self-check-red').length > 0).toEqual(true);
-
-        wrapper = mountWithProps({
-            id: 1,
-            question: 'Question?',
-            multiple: false,
-            options: [{id: 1, text: 'Text', isRight: false}]
-        }, 0);
-        expect(wrapper.find('.self-check-green').length).toEqual(0);
-        expect(wrapper.find('.self-check-red').length > 0).toEqual(true);
-
-        wrapper = mountWithProps({
-            id: 1,
-            question: 'Question?',
-            multiple: false,
-            options: [{id: 1, text: '', isRight: true}]
-        }, 0);
-        expect(wrapper.find('.self-check-green').length).toEqual(0);
-        expect(wrapper.find('.self-check-red').length > 0).toEqual(true);
-
-        wrapper = mountWithProps({
-            id: 1,
+            isRight: true,
             question: 'Question?',
             multiple: false,
             options: [{id: 1, text: 'Text', isRight: true}]

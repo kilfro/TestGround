@@ -23,3 +23,23 @@ export const getRadioGroupValue = (options) => {
 
     return checkedId;
 };
+
+export const checkQuestion = (toCheck) => {
+    const {question, options} = toCheck;
+
+    if (!question || question === '') {
+        return false;
+    }
+
+    const emptyOptions = options.filter(op => op.text === '');
+    if (emptyOptions.length !== 0) {
+        return false;
+    }
+
+    const correctAnswers = options.filter(op => op.isRight === true);
+    if (correctAnswers.length === 0) {
+        return false;
+    }
+
+    return true;
+};

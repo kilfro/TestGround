@@ -1,20 +1,32 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
+import {Button, ButtonGroup} from "@material-ui/core";
 import Question from "./Question";
 import {connect} from 'react-redux';
 import {addQuestion} from "../../store/actions/newTest";
-import '../../styles/component/creator/questions-list.css';
 
 const QuestionsList = (props) => {
-    const {questions, addQuestion} = props;
+    const {questions, addQuestion, nextTab} = props;
+
+    const selfCheck = () => {
+        let isRight = true;
+
+        questions.map(q => {
+            if (!q.isRight) {
+                isRight = false;
+            }
+        });
+
+        return isRight;
+    };
 
     return (
         <>
             {questions.map((q, index) => (<Question question={q} key={q.id} index={index}/>))}
-            <Button fullWidth id={'add_btn'} color={'primary'} variant={'contained'}
-                    onClick={addQuestion}>
-                Добавить вопрос
-            </Button>
+
+            <ButtonGroup className='navigate-btn' variant="contained" color="primary" fullWidth>
+                <Button id={'add_btn'} variant={'outlined'} onClick={addQuestion}>Добавить вопрос</Button>
+                <Button onClick={nextTab} disabled={!selfCheck()}>Далее</Button>
+            </ButtonGroup>
         </>
     );
 };

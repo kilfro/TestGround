@@ -5,3 +5,8 @@ h3 {
 .generate-icon {
     cursor: pointer;
 }
+
+.navigate-btn {
+    text-align: right;
+    margin: 1em 0;
+}

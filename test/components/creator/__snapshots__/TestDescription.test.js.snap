@@ -1324,6 +1324,103 @@ exports[`TestDescription should render correctly 1`] = `
           </label>
         </ForwardRef(FormControlLabel)>
       </WithStyles(ForwardRef(FormControlLabel))>
+      <div
+        className="navigate-btn"
+      >
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          disabled={true}
+          variant="contained"
+        >
+          <ForwardRef(Button)
+            classes={
+              Object {
+                "colorInherit": "MuiButton-colorInherit",
+                "contained": "MuiButton-contained",
+                "containedPrimary": "MuiButton-containedPrimary",
+                "containedSecondary": "MuiButton-containedSecondary",
+                "containedSizeLarge": "MuiButton-containedSizeLarge",
+                "containedSizeSmall": "MuiButton-containedSizeSmall",
+                "disableElevation": "MuiButton-disableElevation",
+                "disabled": "Mui-disabled",
+                "endIcon": "MuiButton-endIcon",
+                "focusVisible": "Mui-focusVisible",
+                "fullWidth": "MuiButton-fullWidth",
+                "iconSizeLarge": "MuiButton-iconSizeLarge",
+                "iconSizeMedium": "MuiButton-iconSizeMedium",
+                "iconSizeSmall": "MuiButton-iconSizeSmall",
+                "label": "MuiButton-label",
+                "outlined": "MuiButton-outlined",
+                "outlinedPrimary": "MuiButton-outlinedPrimary",
+                "outlinedSecondary": "MuiButton-outlinedSecondary",
+                "outlinedSizeLarge": "MuiButton-outlinedSizeLarge",
+                "outlinedSizeSmall": "MuiButton-outlinedSizeSmall",
+                "root": "MuiButton-root",
+                "sizeLarge": "MuiButton-sizeLarge",
+                "sizeSmall": "MuiButton-sizeSmall",
+                "startIcon": "MuiButton-startIcon",
+                "text": "MuiButton-text",
+                "textPrimary": "MuiButton-textPrimary",
+                "textSecondary": "MuiButton-textSecondary",
+                "textSizeLarge": "MuiButton-textSizeLarge",
+                "textSizeSmall": "MuiButton-textSizeSmall",
+              }
+            }
+            color="primary"
+            disabled={true}
+            variant="contained"
+          >
+            <WithStyles(ForwardRef(ButtonBase))
+              className="MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled"
+              component="button"
+              disabled={true}
+              focusRipple={true}
+              focusVisibleClassName="Mui-focusVisible"
+              type="button"
+            >
+              <ForwardRef(ButtonBase)
+                className="MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled"
+                classes={
+                  Object {
+                    "disabled": "Mui-disabled",
+                    "focusVisible": "Mui-focusVisible",
+                    "root": "MuiButtonBase-root",
+                  }
+                }
+                component="button"
+                disabled={true}
+                focusRipple={true}
+                focusVisibleClassName="Mui-focusVisible"
+                type="button"
+              >
+                <button
+                  className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled Mui-disabled"
+                  disabled={true}
+                  onBlur={[Function]}
+                  onDragLeave={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex={-1}
+                  type="button"
+                >
+                  <span
+                    className="MuiButton-label"
+                  >
+                    Далее
+                  </span>
+                </button>
+              </ForwardRef(ButtonBase)>
+            </WithStyles(ForwardRef(ButtonBase))>
+          </ForwardRef(Button)>
+        </WithStyles(ForwardRef(Button))>
+      </div>
     </TestDescription>
   </Connect(TestDescription)>
 </Provider>

@@ -73,9 +73,9 @@ describe('NewTest reducer', () => {
         const state = {
             ...initialState.newTest,
             questions: [
-                {id: 1, question: 'one'},
-                {id: 2, question: 'two'},
-                {id: 3, question: 'three'}
+                {id: 1, question: 'one', options: []},
+                {id: 2, question: 'two', options: []},
+                {id: 3, question: 'three', options: []}
             ]
         };
 
@@ -90,9 +90,9 @@ describe('NewTest reducer', () => {
         const questions = newTestReducer(state, action).questions;
 
         expect(questions).toEqual([
-            {id: 1, question: 'one'},
-            {id: 2, question: 'New question'},
-            {id: 3, question: 'three'}
+            {id: 1, question: 'one', options: []},
+            {id: 2, question: 'New question', options: [], isRight: false},
+            {id: 3, question: 'three', options: []}
         ])
     });
 

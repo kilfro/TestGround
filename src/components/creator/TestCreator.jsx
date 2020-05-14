@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Tab, Tabs} from "@material-ui/core";
+import {Container, Step, StepButton, Stepper} from "@material-ui/core";
 import {connect} from 'react-redux';
 import {v4 as getUID} from 'uuid';
 import '../../styles/component/creator/testcreator.css';
@@ -21,15 +21,11 @@ class TestCreator extends React.Component {
         this.props.createUid(getUID());
     }
 
-    getTabProps = (index) => {
-        return {
-            id: `full-width-tab-${index}`,
-            'aria-controls': `full-width-tabpanel-${index}`,
-        };
-    };
+    nextTab = () => {
+        const {tabPosition} = this.state;
+        const nextTab = tabPosition + 1;
 
-    handleChangeTab = (event, newValue) => {
-        this.setState({tabPosition: newValue})
+        this.setState({tabPosition: nextTab});
     };
 
     render() {
@@ -37,19 +33,32 @@ class TestCreator extends React.Component {
 
         return (
             <Container maxWidth={'md'}>
-                <Tabs value={tabPosition} onChange={this.handleChangeTab} variant="fullWidth">
-                    <Tab label="Информация о тесте" {...this.getTabProps(0)}/>
-                    <Tab label="Вопросы" {...this.getTabProps(1)}/>
-                    <Tab label="Результаты" {...this.getTabProps(2)}/>
-                </Tabs>
+                <Stepper activeStep={tabPosition}>
+                    <Step>
+                        <StepButton onClick={() => {
+                            this.setState({tabPosition: 0})
+                        }}>Информация о тесте</StepButton>
+                    </Step>
+                    <Step>
+                        <StepButton onClick={() => {
+                            this.setState({tabPosition: 1})
+                        }}>Вопросы</StepButton>
+                    </Step>
+                    <Step>
+                        <StepButton onClick={() => {
+                            this.setState({tabPosition: 2})
+                        }}>Результаты</StepButton>
+                    </Step>
+                </Stepper>
 
                 <TabPanel tabPosition={tabPosition} index={0}>
-                    <TestDescription/>
+                    <TestDescription nextTab={this.nextTab}/>
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={1}>
-                    <QuestionsList/>
+                    <QuestionsList nextTab={this.nextTab}/>
                 </TabPanel>
+
                 <TabPanel tabPosition={tabPosition} index={2}>
                     <ResultList/>
                 </TabPanel>
