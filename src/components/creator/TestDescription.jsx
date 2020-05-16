@@ -97,7 +97,8 @@ const TestDescription = (props) => {
             </>}
 
             <div className='navigate-btn'>
-                <Button onClick={nextTab} color={'primary'} variant={'contained'} disabled={!selfCheck()}>Далее</Button>
+                <Button onClick={nextTab} color={'primary'} variant={'contained'} disabled={!selfCheck()}
+                        id={'next-tab'}>Далее</Button>
             </div>
         </>
     );

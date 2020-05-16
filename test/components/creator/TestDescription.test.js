@@ -78,4 +78,48 @@ describe('TestDescription', () => {
             payload: {name: 'New name'}
         });
     });
+
+    it('self-check has to return \'false\' if test name is empty', () => {
+        createWrapper({
+            newTest: {
+                description: {
+                    name: '',
+                    needPassword: false
+                }
+            }
+        });
+
+        const disabled = wrapper.find('button#next-tab').prop('disabled');
+        expect(disabled).toEqual(true);
+    });
+
+    it('self-check has to return \'false\' if needPassword is \'true\' but password is empty', () => {
+        createWrapper({
+            newTest: {
+                description: {
+                    name: 'Name',
+                    needPassword: true,
+                    password: ''
+                }
+            }
+        });
+
+        const disabled = wrapper.find('button#next-tab').prop('disabled');
+        expect(disabled).toEqual(true);
+    });
+
+    it('self-check has to return \'true\' if description is OK', () => {
+        createWrapper({
+            newTest: {
+                description: {
+                    name: 'Name',
+                    needPassword: true,
+                    password: 'password'
+                }
+            }
+        });
+
+        const disabled = wrapper.find('button#next-tab').prop('disabled');
+        expect(disabled).toEqual(false);
+    });
 });
