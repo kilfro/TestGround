@@ -35,19 +35,17 @@ class TestCreator extends React.Component {
             <Container maxWidth={'md'}>
                 <Stepper activeStep={tabPosition}>
                     <Step>
-                        <StepButton onClick={() => {
+                        <StepButton id={'to-description'} onClick={() => {
                             this.setState({tabPosition: 0})
                         }}>Информация о тесте</StepButton>
                     </Step>
                     <Step>
-                        <StepButton onClick={() => {
+                        <StepButton id={'to-questions'} onClick={() => {
                             this.setState({tabPosition: 1})
                         }}>Вопросы</StepButton>
                     </Step>
                     <Step>
-                        <StepButton onClick={() => {
-                            this.setState({tabPosition: 2})
-                        }}>Результаты</StepButton>
+                        <StepButton>Результаты</StepButton>
                     </Step>
                 </Stepper>
 

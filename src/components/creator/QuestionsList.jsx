@@ -25,7 +25,7 @@ const QuestionsList = (props) => {
 
             <ButtonGroup className='navigate-btn' variant="contained" color="primary" fullWidth>
                 <Button id={'add_btn'} variant={'outlined'} onClick={addQuestion}>Добавить вопрос</Button>
-                <Button onClick={nextTab} disabled={!selfCheck()}>Далее</Button>
+                <Button onClick={nextTab} disabled={!selfCheck()} id={'next-tab'}>Далее</Button>
             </ButtonGroup>
         </>
     );
