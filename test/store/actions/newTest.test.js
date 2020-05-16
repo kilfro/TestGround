@@ -7,6 +7,7 @@ import {
     changeResult,
     cleanNewTestState,
     createUid,
+    insertTest,
     removeQuestion,
     removeResult
 } from "../../../src/store/actions/newTest";
@@ -96,6 +97,15 @@ describe('NewTest action creator', () => {
         expect(removeResult(100)).toEqual({
             type: NEW_TEST.REMOVE_RESULT,
             payload: 100
+        })
+    });
+
+    it('should correctly create insert test action', () => {
+        expect(insertTest({test: 'Test'})).toEqual({
+            type: NEW_TEST.INSERT_TEST_TO_DB,
+            payload: {
+                test: 'Test'
+            }
         })
     });
 });
