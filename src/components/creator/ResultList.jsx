@@ -36,7 +36,7 @@ const ResultList = (props) => {
             <ButtonGroup variant="contained" color="primary" fullWidth>
                 <Button variant={'outlined'} color={'primary'} onClick={addResult} id={'add-btn'}>Добавить
                     результат</Button>
-                <Button disabled={!selfCheck()} onClick={saveTest}>Сохранить тест</Button>
+                <Button id={'save-test-btn'} disabled={!selfCheck()} onClick={saveTest}>Сохранить тест</Button>
             </ButtonGroup>
         </>
     );
