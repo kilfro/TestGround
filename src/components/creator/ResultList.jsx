@@ -2,11 +2,33 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Button, ButtonGroup} from "@material-ui/core";
 import ResultDescription from "./ResultDescription";
-import {addResult} from "../../store/actions/newTest";
+import {addResult, insertTest} from "../../store/actions/newTest";
 
 const ResultList = (props) => {
     const results = props.resultDescriptions;
-    const {addResult} = props;
+    const {addResult, insertTest, test} = props;
+
+    const saveTest = () => {
+        insertTest(test);
+    };
+
+    const selfCheck = () => {
+        let wrongResults;
+
+        wrongResults = results.filter(r => r.min === '');
+        if (wrongResults.length !== 0)
+            return false;
+
+        wrongResults = results.filter(r => r.max === '');
+        if (wrongResults.length !== 0)
+            return false;
+
+        wrongResults = results.filter(r => !r.text || r.text === '');
+        if (wrongResults.length !== 0)
+            return false;
+
+        return true;
+    };
 
     return (
         <>
@@ -14,7 +36,7 @@ const ResultList = (props) => {
             <ButtonGroup variant="contained" color="primary" fullWidth>
                 <Button variant={'outlined'} color={'primary'} onClick={addResult} id={'add-btn'}>Добавить
                     результат</Button>
-                <Button>Сохранить тест</Button>
+                <Button disabled={!selfCheck()} onClick={saveTest}>Сохранить тест</Button>
             </ButtonGroup>
         </>
     );
@@ -22,12 +44,14 @@ const ResultList = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        test: state.newTest,
         resultDescriptions: state.newTest.resultDescriptions
     }
 };
 
 const mapDispatchToProps = {
-    addResult
+    addResult,
+    insertTest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultList);

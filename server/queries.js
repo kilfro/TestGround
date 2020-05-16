@@ -38,7 +38,24 @@ const insertUser = (req, res) => {
     )
 };
 
+const createTest = (req, res) => {
+    const {userId, test, uid} = req.body;
+
+    pool.query(
+        "insert into tests (user_id, uid, test) values ($1, $2, $3::jsonb)",
+        [userId, uid, test],
+        (error, result) => {
+            if (error) {
+                throw error;
+            }
+
+            res.status(200);
+        }
+    )
+};
+
 module.exports = {
     getUserByUid,
-    insertUser
+    insertUser,
+    createTest
 };

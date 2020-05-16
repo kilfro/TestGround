@@ -18,3 +18,12 @@ export const createUser = (user) => {
     return axios
         .post(`${HOST}/api/user`, user);
 };
+
+export const createTest = (test, userId, uid) => {
+    return axios
+        .post(`${HOST}/api/test/create`, {
+            test: test,
+            userId: userId,
+            uid: uid
+        });
+};

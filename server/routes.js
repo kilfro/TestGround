@@ -1,9 +1,12 @@
 module.exports = app => {
-    const QUERY = require("./queries");
+    const QUERIES = require("./queries");
 
     app.route('/api/user')
-        .post(QUERY.insertUser);
+        .post(QUERIES.insertUser);
 
     app.route('/api/user/:uid')
-        .get(QUERY.getUserByUid);
+        .get(QUERIES.getUserByUid);
+
+    app.route('/api/test/create')
+        .post(QUERIES.createTest)
 };

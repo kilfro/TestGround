@@ -59,3 +59,10 @@ export const removeResult = (id) => {
         payload: id
     }
 };
+
+export const insertTest = (test) => {
+    return {
+        type: NEW_TEST.INSERT_TEST_TO_DB,
+        payload: test
+    }
+};
