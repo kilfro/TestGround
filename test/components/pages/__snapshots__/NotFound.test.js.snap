@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Not found page should render correctly 1`] = `
+<div
+  className="not-found-page"
+>
+  <div
+    className="code-404"
+  >
+    404
+  </div>
+  <div>
+    Похоже страницы, которую Вы ищете, не существует
+  </div>
+  <WithStyles(ForwardRef(Button))
+    href="/"
+    size="large"
+    variant="outlined"
+  >
+    Вернуться домой
+  </WithStyles(ForwardRef(Button))>
+</div>
+`;
