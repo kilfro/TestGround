@@ -13,3 +13,14 @@ h2, h5 {
 .next {
     margin: 1em 0 !important;
 }
+
+.password-box {
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+}
+
+.password-box span {
+    padding-bottom: .5em;
+    margin-right: 1em;
+}
