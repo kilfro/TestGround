@@ -54,8 +54,47 @@ const createTest = (req, res) => {
     )
 };
 
+const getTest = (req, res) => {
+    const uid = req.params.uid;
+
+    pool.query('select * from tests where uid = $1', [uid],
+        (error, result) => {
+            if (error) {
+                throw error;
+            }
+
+            if (result.rows.length === 1) {
+                const fromDB = result.rows[0];
+                const questions = fromDB.test.questions.map(q => {
+                    const options = q.options.map(op => {
+                        return {
+                            id: op.id,
+                            text: op.text
+                        }
+                    });
+
+                    return {
+                        ...q,
+                        options: options
+                    }
+                });
+
+                const test = {
+                    ...fromDB.test.description,
+                    questions
+                };
+
+                res.status(200).json(test);
+            } else {
+                res.status(404).send('Тест не найден');
+            }
+
+        });
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
-    createTest
+    createTest,
+    getTest
 };

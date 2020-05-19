@@ -8,5 +8,8 @@ module.exports = app => {
         .get(QUERIES.getUserByUid);
 
     app.route('/api/test/create')
-        .post(QUERIES.createTest)
+        .post(QUERIES.createTest);
+
+    app.route('/api/test/get/:uid')
+        .get(QUERIES.getTest);
 };

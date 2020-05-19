@@ -27,3 +27,8 @@ export const createTest = (test, userId, uid) => {
             uid: uid
         });
 };
+
+export const getTest = (uid) => {
+    return axios
+        .get(`${HOST}/api/test/get/${uid}`);
+};
