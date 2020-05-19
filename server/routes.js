@@ -12,4 +12,7 @@ module.exports = app => {
 
     app.route('/api/test/get/:uid')
         .get(QUERIES.getTest);
+
+    app.route('/api/test/checkPassword')
+        .put(QUERIES.checkPassword)
 };

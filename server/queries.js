@@ -79,8 +79,11 @@ const getTest = (req, res) => {
                     }
                 });
 
+                const {password, ...rest} = fromDB.test.description;
+
                 const test = {
-                    ...fromDB.test.description,
+                    uid,
+                    ...rest,
                     questions
                 };
 
@@ -92,9 +95,28 @@ const getTest = (req, res) => {
         });
 };
 
+const checkPassword = (req, res) => {
+    const {password, uid} = req.body;
+
+    pool.query('select test::jsonb#>\'{description, password}\' as password from tests where uid = $1', [uid],
+        (error, result) => {
+            if (error) {
+                throw error;
+            }
+
+            if (result.rows.length === 1) {
+                const fromBase = result.rows[0].password;
+                res.status(200).send(fromBase === password);
+            } else {
+                res.status(200).send(false);
+            }
+        })
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
     createTest,
-    getTest
+    getTest,
+    checkPassword
 };

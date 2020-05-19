@@ -2,6 +2,7 @@ import React from 'react';
 import * as API from '../../api/api';
 import {Container, Step, StepLabel, Stepper} from "@material-ui/core";
 import TabPanel from "../supporting/TabPanel";
+import TestDescription from "./TestDescription";
 
 class MainTestPage extends React.Component {
     constructor(props) {
@@ -24,7 +25,18 @@ class MainTestPage extends React.Component {
     };
 
     render() {
-        const {tabPosition} = this.state;
+        const {tabPosition, test} = this.state;
+        const descriptionProps = {
+            uid: test.uid,
+            name: test.name,
+            password: test.password,
+            anonymous: test.anonymous,
+            additional: test.additional,
+            needPassword: test.needPassword,
+            onlyRegistered: test.onlyRegistered,
+            nextTab: this.nextTab
+        };
+
         return (
             <Container maxWidth={'md'}>
                 <Stepper activeStep={tabPosition}>
@@ -40,6 +52,7 @@ class MainTestPage extends React.Component {
                 </Stepper>
 
                 <TabPanel tabPosition={tabPosition} index={0}>
+                    <TestDescription {...descriptionProps}/>
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={1}>

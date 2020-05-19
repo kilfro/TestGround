@@ -1,0 +1,15 @@
+h2, h5 {
+    margin: 0;
+}
+
+.anonymous {
+    color: hsl(0, 40%, 40%);
+}
+
+.additional-info {
+    margin: 1em 0;
+}
+
+.next {
+    margin: 1em 0 !important;
+}
