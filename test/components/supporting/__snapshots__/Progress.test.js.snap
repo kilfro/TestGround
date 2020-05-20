@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress should render correctly 1`] = `
+<WithStyles(WithStyles(ForwardRef(LinearProgress)))
+  value={50}
+  variant="determinate"
+>
+  <WithStyles(ForwardRef(LinearProgress))
+    classes={
+      Object {
+        "bar": "WithStyles(ForwardRef(LinearProgress))-bar-2",
+        "root": "WithStyles(ForwardRef(LinearProgress))-root-1",
+      }
+    }
+    value={50}
+    variant="determinate"
+  >
+    <ForwardRef(LinearProgress)
+      classes={
+        Object {
+          "bar": "MuiLinearProgress-bar WithStyles(ForwardRef(LinearProgress))-bar-2",
+          "bar1Buffer": "MuiLinearProgress-bar1Buffer",
+          "bar1Determinate": "MuiLinearProgress-bar1Determinate",
+          "bar1Indeterminate": "MuiLinearProgress-bar1Indeterminate",
+          "bar2Buffer": "MuiLinearProgress-bar2Buffer",
+          "bar2Indeterminate": "MuiLinearProgress-bar2Indeterminate",
+          "barColorPrimary": "MuiLinearProgress-barColorPrimary",
+          "barColorSecondary": "MuiLinearProgress-barColorSecondary",
+          "buffer": "MuiLinearProgress-buffer",
+          "colorPrimary": "MuiLinearProgress-colorPrimary",
+          "colorSecondary": "MuiLinearProgress-colorSecondary",
+          "dashed": "MuiLinearProgress-dashed",
+          "dashedColorPrimary": "MuiLinearProgress-dashedColorPrimary",
+          "dashedColorSecondary": "MuiLinearProgress-dashedColorSecondary",
+          "determinate": "MuiLinearProgress-determinate",
+          "indeterminate": "MuiLinearProgress-indeterminate",
+          "query": "MuiLinearProgress-query",
+          "root": "MuiLinearProgress-root WithStyles(ForwardRef(LinearProgress))-root-1",
+        }
+      }
+      value={50}
+      variant="determinate"
+    >
+      <div
+        aria-valuenow={50}
+        className="MuiLinearProgress-root WithStyles(ForwardRef(LinearProgress))-root-1 MuiLinearProgress-colorPrimary MuiLinearProgress-determinate"
+        role="progressbar"
+      >
+        <div
+          className="MuiLinearProgress-bar WithStyles(ForwardRef(LinearProgress))-bar-2 MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Determinate"
+          style={
+            Object {
+              "transform": "translateX(-50%)",
+            }
+          }
+        />
+      </div>
+    </ForwardRef(LinearProgress)>
+  </WithStyles(ForwardRef(LinearProgress))>
+</WithStyles(WithStyles(ForwardRef(LinearProgress)))>
+`;
