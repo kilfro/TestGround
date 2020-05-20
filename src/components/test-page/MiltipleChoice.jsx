@@ -15,7 +15,6 @@ const MultipleChoice = (props) => {
 
     const changeHandler = (event) => {
         const {id, checked} = event.target;
-        console.log(id);
 
         let newAnswer;
         if (checked) {
