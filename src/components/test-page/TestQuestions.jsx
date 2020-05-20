@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Button} from "@material-ui/core";
 import Question from "./Question";
 import '../../styles/component/test-page/test-questions.css';
-import {Progress} from "../supporting/Propgress";
+import {Progress} from "../supporting/Progress";
 import {changeAnswer, formAnswers} from "../../store/actions/answers";
 
 class TestQuestions extends React.Component {

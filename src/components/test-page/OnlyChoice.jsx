@@ -29,7 +29,7 @@ const OnlyChoice = (props) => {
             {props.options.map(op =>
                 <FormControlLabel
                     key={op.id} label={op.text} value={String(op.id)}
-                    control={<Radio color="primary"/>}
+                    control={<Radio color="primary" id={String(op.id)}/>}
                 />
             )}
         </RadioGroup>
