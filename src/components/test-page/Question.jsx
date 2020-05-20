@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/component/test-page/test-questions.css';
 import MultipleChoice from "./MiltipleChoice";
 import OnlyChoice from "./OnlyChoice";
@@ -15,6 +16,14 @@ const Question = (props) => {
             }
         </div>
     );
+};
+
+Question.propTypes = {
+    id: PropTypes.number.isRequired,
+    question: PropTypes.string.isRequired,
+    multiple: PropTypes.bool.isRequired,
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
+    answer: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default Question;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import '../../styles/component/test-page/option.css';
@@ -33,6 +34,12 @@ const OnlyChoice = (props) => {
             )}
         </RadioGroup>
     );
+};
+
+OnlyChoice.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
+    answer: PropTypes.arrayOf(PropTypes.object).isRequired,
+    questionId: PropTypes.number.isRequired
 };
 
 const mapDispatchToProps = {

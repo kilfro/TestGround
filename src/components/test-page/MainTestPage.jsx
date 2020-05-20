@@ -30,7 +30,6 @@ class MainTestPage extends React.Component {
         const descriptionProps = {
             uid: test.uid,
             name: test.name,
-            password: test.password,
             anonymous: test.anonymous,
             additional: test.additional,
             needPassword: test.needPassword,

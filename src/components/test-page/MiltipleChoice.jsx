@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 import '../../styles/component/test-page/option.css';
@@ -37,6 +38,12 @@ const MultipleChoice = (props) => {
             )}
         </div>
     );
+};
+
+MultipleChoice.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
+    answer: PropTypes.arrayOf(PropTypes.object).isRequired,
+    questionId: PropTypes.number.isRequired
 };
 
 const mapDispatchToProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button} from "@material-ui/core";
 import Question from "./Question";
@@ -53,6 +54,11 @@ class TestQuestions extends React.Component {
         )
     }
 }
+
+TestQuestions.propTypes = {
+    questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    nextTab: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {
