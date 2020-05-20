@@ -6,6 +6,8 @@ import {createError} from "../../store/actions/error";
 import {connect} from 'react-redux';
 
 class TestDescription extends React.Component {
+    _isMounted = true;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,17 +15,27 @@ class TestDescription extends React.Component {
         };
     }
 
-    clickHandler = () => {
-        API.checkTestPassword(this.props.uid, this.state.inputPassword)
-            .then(res => {
-                if (res.data) {
-                    this.props.nextTab(1);
-                } else {
-                    this.props.createError('Неверный пароль');
-                }
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
-                this.setState({inputPassword: ''})
-            })
+    clickHandler = () => {
+        if (this.props.needPassword) {
+            API.checkTestPassword(this.props.uid, this.state.inputPassword)
+                .then(res => {
+                    if (res.data) {
+                        this.props.nextTab(1);
+                    } else {
+                        this.props.createError('Неверный пароль');
+                    }
+
+                    if (this._isMounted) {
+                        this.setState({inputPassword: ''});
+                    }
+                });
+        } else {
+            this.props.nextTab(1);
+        }
     };
 
     inputPasswordChange = (event) => {

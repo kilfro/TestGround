@@ -3,6 +3,7 @@ import * as API from '../../api/api';
 import {Container, Step, StepLabel, Stepper} from "@material-ui/core";
 import TabPanel from "../supporting/TabPanel";
 import TestDescription from "./TestDescription";
+import TestQuestions from "./TestQuestions";
 
 class MainTestPage extends React.Component {
     constructor(props) {
@@ -37,6 +38,11 @@ class MainTestPage extends React.Component {
             nextTab: this.nextTab
         };
 
+        const questionsProps = {
+            questions: test.questions,
+            nextTab: this.nextTab
+        };
+
         return (
             <Container maxWidth={'md'}>
                 <Stepper activeStep={tabPosition}>
@@ -56,6 +62,7 @@ class MainTestPage extends React.Component {
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={1}>
+                    <TestQuestions {...questionsProps}/>
                 </TabPanel>
 
                 <TabPanel tabPosition={tabPosition} index={2}>
