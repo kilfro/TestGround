@@ -4,14 +4,14 @@ import MultipleChoice from "./MiltipleChoice";
 import OnlyChoice from "./OnlyChoice";
 
 const Question = (props) => {
-    const {question, multiple, options} = props;
+    const {id, question, multiple, options, answer} = props;
 
     return (
         <div>
             <h3>{question}</h3>
             {multiple ?
-                <MultipleChoice options={options}/> :
-                <OnlyChoice options={options}/>
+                <MultipleChoice options={options} questionId={id} answer={answer}/> :
+                <OnlyChoice options={options} questionId={id} answer={answer}/>
             }
         </div>
     );

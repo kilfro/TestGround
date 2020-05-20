@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Button} from "@material-ui/core";
 import Question from "./Question";
 import '../../styles/component/test-page/test-questions.css';
 import {Progress} from "../supporting/Propgress";
+import {changeAnswer, formAnswers} from "../../store/actions/answers";
 
 class TestQuestions extends React.Component {
     constructor(props) {
@@ -10,6 +12,10 @@ class TestQuestions extends React.Component {
         this.state = {
             currentQuestionIndex: 0
         };
+    }
+
+    componentDidMount() {
+        this.props.formAnswers(this.props.questions);
     }
 
     nextQuestion = () => {
@@ -31,13 +37,15 @@ class TestQuestions extends React.Component {
         const {questions} = this.props;
         const {currentQuestionIndex} = this.state;
         const currentQuestion = questions[currentQuestionIndex];
+        let filterElement = this.props.answers.filter(a => a.questionId === currentQuestion.id)[0];
+        const userAnswer = filterElement ? filterElement.answers : [];
         const lastQuestion = currentQuestionIndex + 1 === questions.length;
 
         return (
             <div>
                 <Progress variant="determinate" value={this.getProgress()} className='progress'/>
                 <h5 className='counter'>Вопрос {currentQuestionIndex + 1} из {questions.length}</h5>
-                <Question {...currentQuestion}/>
+                <Question {...currentQuestion} answer={userAnswer}/>
                 <Button onClick={this.nextQuestion} color={'primary'} variant={'contained'}>
                     {lastQuestion ? 'Завершить тест' : 'Дальше'}
                 </Button>
@@ -46,4 +54,15 @@ class TestQuestions extends React.Component {
     }
 }
 
-export default TestQuestions;
+const mapStateToProps = (state) => {
+    return {
+        answers: state.answers
+    }
+};
+
+const mapDispatchToProps = {
+    formAnswers,
+    changeAnswer
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestQuestions);
