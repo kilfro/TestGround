@@ -1,4 +1,4 @@
-import {ANSWERS} from '../actions/'
+import {ANSWERS} from '../actionTypes';
 
 export const answersReducer = (state = [], action) => {
     switch (action.type) {
