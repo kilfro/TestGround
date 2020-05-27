@@ -113,10 +113,69 @@ const checkPassword = (req, res) => {
         })
 };
 
+const saveAnswersAndReturnResult = (req, response) => {
+    const {userId, testUid, answers} = req.body;
+
+    const userAnswers = answers.map(a => {
+        return {
+            questionId: a.questionId,
+            answers: a.answers.map(ans => ans.id)
+        };
+    });
+
+    pool.query(`select id, test from tests where uid = '${testUid}'`, [])
+        .then(res => res.rows[0])
+        .then(row => {
+            const {test} = row;
+
+            const correctAnswers = {};
+            test.questions.forEach(q => {
+                const correctOptionsId = q.options
+                    .filter(op => op.isRight)
+                    .map(op => op.id);
+
+                correctAnswers[q.id] = {
+                    answers: correctOptionsId,
+                    points: q.cost
+                }
+            });
+
+            const resultPoints = userAnswers.reduce((sum, current) => {
+                const correctAnswer = correctAnswers[current.questionId];
+                let correct = correctAnswer.answers.length === current.answers.length;
+                if (correct) {
+                    correctAnswer.answers.forEach(ans => {
+                        if (!current.answers.includes(String(ans))) {
+                            correct = false;
+                        }
+                    })
+                }
+                return correct ? sum + correctAnswer.points : sum;
+            }, 0);
+
+            const result = {
+                points: resultPoints,
+                maxPoints: test.questions.reduce((sum, current) => sum + current.cost, 0)
+            };
+
+            for (let res of test.resultDescriptions) {
+                if (resultPoints >= res.min && resultPoints <= res.max) {
+                    result.text = res.text;
+                    break;
+                }
+            }
+
+            pool.query('insert into results (test_id, user_id, answers, result) values ($1, $2, $3::jsonb, $4::jsonb)',
+                [row.id, userId, JSON.stringify(userAnswers), JSON.stringify(result)])
+                .then(r => response.status(200).json(result));
+        });
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
     createTest,
     getTest,
-    checkPassword
+    checkPassword,
+    saveAnswersAndReturnResult
 };

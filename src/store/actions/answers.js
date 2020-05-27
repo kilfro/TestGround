@@ -29,3 +29,10 @@ export const cleanAnswers = () => {
         type: ANSWERS.CLEAN_STATE
     }
 };
+
+export const sendAnswers = (testUid, answers, anonymous) => {
+    return {
+        type: ANSWERS.SEND_ANSWERS,
+        payload: {anonymous, testUid, answers}
+    }
+};

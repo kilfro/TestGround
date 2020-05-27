@@ -5,7 +5,7 @@ import {Button} from "@material-ui/core";
 import Question from "./Question";
 import '../../styles/component/test-page/test-questions.css';
 import {Progress} from "../supporting/Progress";
-import {changeAnswer, formAnswers} from "../../store/actions/answers";
+import {changeAnswer, formAnswers, sendAnswers} from "../../store/actions/answers";
 
 class TestQuestions extends React.Component {
     constructor(props) {
@@ -23,6 +23,7 @@ class TestQuestions extends React.Component {
         if (this.state.currentQuestionIndex + 1 !== this.props.questions.length) {
             this.setState((prev) => ({currentQuestionIndex: prev.currentQuestionIndex + 1}));
         } else {
+            this.props.sendAnswers(this.props.testUid, this.props.answers, this.props.anonymous);
             this.props.nextTab(2);
         }
     };
@@ -68,7 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     formAnswers,
-    changeAnswer
+    changeAnswer,
+    sendAnswers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestQuestions);

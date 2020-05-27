@@ -41,3 +41,13 @@ export const checkTestPassword = (uid, password) => {
 
     return axios.put(`${HOST}/api/test/checkPassword`, body);
 };
+
+export const sendAnswers = (userId, testUid, answers) => {
+    const body = {
+        userId,
+        testUid,
+        answers
+    };
+
+    return axios.put(`${HOST}/api/test/result`, body);
+};

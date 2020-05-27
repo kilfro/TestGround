@@ -14,5 +14,8 @@ module.exports = app => {
         .get(QUERIES.getTest);
 
     app.route('/api/test/checkPassword')
-        .put(QUERIES.checkPassword)
+        .put(QUERIES.checkPassword);
+
+    app.route('/api/test/result')
+        .put(QUERIES.saveAnswersAndReturnResult);
 };
