@@ -1,4 +1,4 @@
-import {changeAnswer, cleanAnswers, formAnswers} from "../../../src/store/actions/answers";
+import {changeAnswer, cleanAnswers, formAnswers, sendAnswers} from "../../../src/store/actions/answers";
 import {ANSWERS} from "../../../src/store/actionTypes";
 
 describe('Answers action creator', () => {
@@ -33,6 +33,21 @@ describe('Answers action creator', () => {
     it('should correctly create clean answers action', () => {
         expect(cleanAnswers()).toEqual({
             type: ANSWERS.CLEAN_STATE
+        })
+    });
+
+    it('should correctly create send answers action', () => {
+        const testUid = 'UID';
+        const answers = [{id: 1}, {id: 10}, {id: 100}];
+        const anonymous = true;
+
+        expect(sendAnswers(testUid, answers, anonymous)).toEqual({
+            type: ANSWERS.SEND_ANSWERS,
+            payload: {
+                testUid: 'UID',
+                answers: [{id: 1}, {id: 10}, {id: 100}],
+                anonymous: true
+            }
         })
     });
 });
