@@ -5,7 +5,6 @@ import logo from '../../logo-2.png';
 import '../../styles/component/header/header.css';
 import {Link} from "react-router-dom";
 import {logoutRequest} from "../../store/actions/auth";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 export class Header extends React.Component {
     render() {
@@ -18,8 +17,10 @@ export class Header extends React.Component {
                         <img src={logo} alt={'logo'} className='header-logo'/>
                     </Link>
                     <div className={'menu-container'}>
-                        {authenticated && <Button href={'/create'} color='inherit' id={'create_header_btn'}>
-                            <AddCircleOutlineIcon className='menu-icon'/>новый тест</Button>}
+                        {authenticated && <>
+                            <Button href={'/create'} color='inherit' id={'create_header_btn'}>новый тест</Button>
+                            <Button href={'/user/results'} color='inherit'>мои результаты</Button>
+                        </>}
                     </div>
                     {authenticated ?
                         <Button onClick={() => logoutRequest()} color='inherit'

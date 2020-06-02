@@ -13,6 +13,7 @@ import {deleteError} from "./store/actions/error";
 import Header from "./components/header/Header";
 import TestCreator from "./components/creator/TestCreator";
 import MainTestPage from "./components/test-page/MainTestPage";
+import ResultsPage from "./components/user/results/ResultsPage";
 
 const App = (props) => {
     const {error, deleteError} = props;
@@ -27,6 +28,7 @@ const App = (props) => {
                     <Route path={'/registration'} component={Registration}/>
                     <Route path={'/create'} component={TestCreator}/>
                     <Route path={'/test/:uid'} component={MainTestPage}/>
+                    <Route path={'/user/results'} component={ResultsPage}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </BrowserRouter>
