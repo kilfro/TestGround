@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Button, TextField} from "@material-ui/core";
 import '../../styles/component/test-page/description.css';
 import * as API from "../../api/api";
@@ -63,16 +62,6 @@ class TestDescription extends React.Component {
         );
     }
 }
-
-TestDescription.propTypes = {
-    uid: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    anonymous: PropTypes.bool.isRequired,
-    additional: PropTypes.string.isRequired,
-    needPassword: PropTypes.bool.isRequired,
-    onlyRegistered: PropTypes.bool.isRequired,
-    nextTab: PropTypes.func.isRequired
-};
 
 const mapDispatchToProps = {
     createError

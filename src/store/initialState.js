@@ -1,7 +1,7 @@
 export default {
     error: null,
     user: {
-        authenticated: false,
+        authenticated: undefined,
         photoURL: null,
         uid: null,
         displayName: null,

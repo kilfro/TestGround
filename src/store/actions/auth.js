@@ -46,3 +46,9 @@ export function registerUser(email, password) {
         }
     }
 }
+
+export const unauthorized = () => {
+    return {
+        type: AUTH.UNAUTHORIZED
+    }
+};

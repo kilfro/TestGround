@@ -11,7 +11,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import {rootSaga} from "./store/sagas/rootSaga";
 import {getFirebaseToken, getFirebaseUser} from "./auth/auth";
 import {createError} from "./store/actions/error";
-import {loginSuccess} from "./store/actions/auth";
+import {loginSuccess, unauthorized} from "./store/actions/auth";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -37,6 +37,7 @@ ReactDOM.render(
 getFirebaseUser()
     .then(async user => {
         if (!user) {
+            store.dispatch(unauthorized());
             return;
         }
         const token = await getFirebaseToken();
