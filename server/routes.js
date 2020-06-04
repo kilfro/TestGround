@@ -18,4 +18,7 @@ module.exports = app => {
 
     app.route('/api/test/result')
         .put(QUERIES.saveAnswersAndReturnResult);
+
+    app.route('/api/user/results/:userUid')
+        .get(QUERIES.getUserResults);
 };

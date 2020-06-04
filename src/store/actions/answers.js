@@ -30,9 +30,9 @@ export const cleanAnswers = () => {
     }
 };
 
-export const sendAnswers = (testUid, answers, anonymous) => {
+export const sendAnswers = (userUid, testUid, answers) => {
     return {
         type: ANSWERS.SEND_ANSWERS,
-        payload: {anonymous, testUid, answers}
+        payload: {userUid, testUid, answers}
     }
 };

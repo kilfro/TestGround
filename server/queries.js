@@ -114,7 +114,7 @@ const checkPassword = (req, res) => {
 };
 
 const saveAnswersAndReturnResult = (req, response) => {
-    const {userId, testUid, answers} = req.body;
+    const {userUid, testUid, answers} = req.body;
 
     const userAnswers = answers.map(a => {
         return {
@@ -153,9 +153,12 @@ const saveAnswersAndReturnResult = (req, response) => {
                 return correct ? sum + correctAnswer.points : sum;
             }, 0);
 
+            const maxPoints = test.questions.reduce((sum, current) => sum + current.cost, 0);
+
             const result = {
                 points: resultPoints,
-                maxPoints: test.questions.reduce((sum, current) => sum + current.cost, 0)
+                maxPoints: maxPoints,
+                percent: resultPoints / maxPoints
             };
 
             for (let res of test.resultDescriptions) {
@@ -165,10 +168,24 @@ const saveAnswersAndReturnResult = (req, response) => {
                 }
             }
 
-            pool.query('insert into results (test_id, user_id, answers, result) values ($1, $2, $3::jsonb, $4::jsonb)',
-                [row.id, userId, JSON.stringify(userAnswers), JSON.stringify(result)])
+            pool.query(`insert into results (test_id, user_id, answers, result) 
+                        values ($1, (select id from users where uid = $2), $3::jsonb, $4::jsonb)`,
+                [row.id, userUid, JSON.stringify(userAnswers), JSON.stringify(result)])
                 .then(r => response.status(200).json(result));
         });
+};
+
+const getUserResults = (req, res) => {
+    const userUid = req.params.userUid;
+
+    pool.query(`select t.uid as uid, count(1), 
+                t.test::jsonb#>'{description, name}' as name, 
+                max(r.result:: jsonb->>'percent') as max
+                from results as r
+                join tests as t on r.test_id = t.id
+                where r.user_id = (select id from users where uid = $1)
+                group by (uid, name)`, [userUid])
+        .then(result => res.status(200).json(result));
 };
 
 module.exports = {
@@ -177,5 +194,6 @@ module.exports = {
     createTest,
     getTest,
     checkPassword,
-    saveAnswersAndReturnResult
+    saveAnswersAndReturnResult,
+    getUserResults
 };

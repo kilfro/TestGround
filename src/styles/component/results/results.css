@@ -1,0 +1,23 @@
+.result-table {
+    margin-top: 1em;
+}
+
+.small {
+    width: 25%;
+}
+
+.table-head * {
+    font-weight: bold;
+}
+
+.gray-row {
+    background-color: rgba(0, 0, 102, .15);
+}
+
+.body-row * {
+    font-size: 1em !important;
+}
+
+.body-row:hover {
+    background-color: rgba(0, 0, 102, .1);
+}

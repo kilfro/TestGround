@@ -20,11 +20,13 @@ class TestQuestions extends React.Component {
     }
 
     nextQuestion = () => {
-        if (this.state.currentQuestionIndex + 1 !== this.props.questions.length) {
+        const {user, testUid, answers, nextTab, sendAnswers, questions} = this.props;
+
+        if (this.state.currentQuestionIndex + 1 !== questions.length) {
             this.setState((prev) => ({currentQuestionIndex: prev.currentQuestionIndex + 1}));
         } else {
-            this.props.sendAnswers(this.props.testUid, this.props.answers, this.props.anonymous);
-            this.props.nextTab(2);
+            sendAnswers(user, testUid, answers);
+            nextTab(2);
         }
     };
 
@@ -63,7 +65,8 @@ TestQuestions.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        answers: state.answers
+        answers: state.answers,
+        user: state.auth.uid
     }
 };
 

@@ -1,7 +1,7 @@
 import initialState from "../initialState";
 import {AUTH} from "../actionTypes";
 
-export const authReducer = (state = initialState.user, action) => {
+export const authReducer = (state = initialState.auth, action) => {
     switch (action.type) {
         case AUTH.LOGIN_SUCCESS:
             const {user, token} = action.payload;

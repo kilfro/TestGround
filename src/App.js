@@ -28,7 +28,7 @@ const App = (props) => {
                     <Route path={'/registration'} component={Registration}/>
                     <Route path={'/create'} component={TestCreator}/>
                     <Route path={'/test/:uid'} component={MainTestPage}/>
-                    <Route path={'/user/results'} component={ResultsPage}/>
+                    <Route path={'/user/results/'} component={ResultsPage}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </BrowserRouter>
