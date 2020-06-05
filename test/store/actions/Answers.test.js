@@ -37,16 +37,16 @@ describe('Answers action creator', () => {
     });
 
     it('should correctly create send answers action', () => {
+        const userUid = 'USER';
         const testUid = 'UID';
         const answers = [{id: 1}, {id: 10}, {id: 100}];
-        const anonymous = true;
 
-        expect(sendAnswers(testUid, answers, anonymous)).toEqual({
+        expect(sendAnswers(userUid, testUid, answers)).toEqual({
             type: ANSWERS.SEND_ANSWERS,
             payload: {
                 testUid: 'UID',
                 answers: [{id: 1}, {id: 10}, {id: 100}],
-                anonymous: true
+                userUid: 'USER'
             }
         })
     });

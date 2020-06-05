@@ -21,7 +21,7 @@ const logoutAction = {
 
 describe('Auth reducer', () => {
     it('should return initial state', () => {
-        expect(authReducer(undefined, {})).toEqual(initialState.user);
+        expect(authReducer(undefined, {})).toEqual(initialState.auth);
     });
 
     it('should add user in state', () => {
@@ -40,6 +40,6 @@ describe('Auth reducer', () => {
             },
             logoutAction);
 
-        expect(returnedState).toEqual(initialState.user);
+        expect(returnedState).toEqual(initialState.auth);
     });
 });

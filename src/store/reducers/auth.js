@@ -14,7 +14,7 @@ export const authReducer = (state = initialState.auth, action) => {
                 token: token
             };
         case AUTH.LOGOUT_SUCCESS:
-            return initialState.user;
+            return initialState.auth;
         case AUTH.UNAUTHORIZED:
             return {...state, authenticated: false};
         default:
