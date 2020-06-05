@@ -21,3 +21,12 @@
 .body-row:hover {
     background-color: rgba(0, 0, 102, .1);
 }
+
+.table-title * {
+    flex-grow: 1;
+}
+
+.table-title {
+    margin-top: 1em;
+    display: flex;
+}

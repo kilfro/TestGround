@@ -1,6 +1,5 @@
 import React from 'react';
 import * as API from '../../../api/api';
-import {getFirebaseUser} from "../../../auth/auth";
 import {
     Container,
     Paper,
@@ -10,9 +9,14 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TableSortLabel
+    TableSortLabel,
+    TextField
 } from "@material-ui/core";
 import '../../../styles/component/results/results.css';
+import {getFirebaseUser} from "../../../auth/auth";
+import {InputAdornment} from "@material-ui/core/es/index";
+import Search from "@material-ui/icons/esm/Search";
+import {compare} from "../../supporting/Functions";
 
 class ResultsPage extends React.Component {
 
@@ -21,7 +25,8 @@ class ResultsPage extends React.Component {
         this.state = {
             results: [],
             orderBy: 'name',
-            order: 'asc'
+            order: 'asc',
+            searchFor: ''
         };
     }
 
@@ -49,25 +54,36 @@ class ResultsPage extends React.Component {
         }
     };
 
+    searchChangeHandler = (event) => {
+        const {value} = event.target;
+
+        this.setState({searchFor: value});
+    };
+
     render() {
-        const {results, orderBy, order} = this.state;
+        const {orderBy, order} = this.state;
 
-        const compare = (a, b, orderBy) => {
-            if (b[orderBy] < a[orderBy]) {
-                return 1;
-            }
-            if (b[orderBy] > a[orderBy]) {
-                return -1;
-            }
-            return 0;
-        };
-
-        results.sort((a, b) => {
-            return order === 'asc' ? compare(a, b, orderBy) : -compare(a, b, orderBy);
-        });
+        const results = this.state.results
+            .filter(res => res.name.includes(this.state.searchFor.trim()))
+            .sort((a, b) => {
+                return order === 'asc' ? compare(a, b, orderBy) : -compare(a, b, orderBy);
+            });
 
         return (
             <Container maxWidth={'md'}>
+                <div className='table-title'>
+                    <h2>Мои результаты</h2>
+                    <TextField
+                        onChange={this.searchChangeHandler}
+                        placeholder={'Поиск по названию'}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search/>
+                                </InputAdornment>
+                            ),
+                        }}/>
+                </div>
                 <TableContainer component={Paper} className='result-table'>
                     <Table aria-label="simple table">
                         <TableHead>

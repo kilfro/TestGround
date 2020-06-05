@@ -43,3 +43,20 @@ export const checkQuestion = (toCheck) => {
 
     return true;
 };
+
+/**
+ * Сравнение двух элементов массива по заданому полю
+ * @param a         первый элемент
+ * @param b         второй элемент
+ * @param orderBy   {string}    поле для сравнения
+ * @returns         {number}    результат сравнения
+ */
+export const compare = (a, b, orderBy) => {
+    if (b[orderBy] < a[orderBy]) {
+        return 1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+        return -1;
+    }
+    return 0;
+};
