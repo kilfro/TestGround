@@ -1,14 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {AppBar, Button, Toolbar} from "@material-ui/core";
+import {AppBar, Avatar, Button, Menu, MenuItem, Toolbar} from "@material-ui/core";
 import logo from '../../logo-2.png';
 import '../../styles/component/header/header.css';
 import {Link} from "react-router-dom";
 import {logoutRequest} from "../../store/actions/auth";
 
 export class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profileMenuAnchor: null
+        };
+    }
+
     render() {
-        const {authenticated, logoutRequest} = this.props;
+        const {authenticated, name, photo, logoutRequest} = this.props;
 
         return (
             <AppBar position={'static'} className='header'>
@@ -23,8 +30,23 @@ export class Header extends React.Component {
                         </>}
                     </div>
                     {authenticated ?
-                        <Button onClick={() => logoutRequest()} color='inherit'
-                                id={'logout_header_btn'}>Выйти</Button> :
+                        <>
+                            <Avatar alt={name} src={photo}
+                                    onClick={(event) => this.setState({profileMenuAnchor: event.target})}/>
+                            <Menu
+                                keepMounted
+                                anchorEl={this.state.profileMenuAnchor}
+                                open={Boolean(this.state.profileMenuAnchor)}
+                                onClose={() => this.setState({profileMenuAnchor: null})}
+                            >
+                                <MenuItem onClick={() => this.setState({profileMenuAnchor: null})}>Мой
+                                    профиль</MenuItem>
+                                <MenuItem onClick={() => {
+                                    logoutRequest();
+                                    this.setState({profileMenuAnchor: null});
+                                }}>Выйти</MenuItem>
+                            </Menu>
+                        </> :
                         <Button href={'/login'} color='inherit' id={'login_header_btn'}>Войти</Button>}
                 </Toolbar>
             </AppBar>
@@ -34,7 +56,9 @@ export class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        authenticated: state.auth.authenticated
+        authenticated: state.auth.authenticated,
+        name: state.auth.displayName,
+        photo: state.auth.photoURL
     }
 };
 
