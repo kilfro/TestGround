@@ -55,3 +55,12 @@ export const sendAnswers = (userUid, testUid, answers) => {
 export const getUserResultsList = (userUid) => {
     return axios.get(`/api/user/results/${userUid}`)
 };
+
+export const updateUser = (user) => {
+    const body = {
+        id: user.id,
+        name: user.name
+    };
+
+    return axios.put('/api/user/update', body)
+};

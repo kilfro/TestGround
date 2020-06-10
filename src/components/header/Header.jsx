@@ -14,6 +14,10 @@ export class Header extends React.Component {
         };
     }
 
+    closeUserMenu = () => {
+        this.setState({profileMenuAnchor: null})
+    };
+
     render() {
         const {authenticated, name, photo, logoutRequest} = this.props;
 
@@ -23,7 +27,7 @@ export class Header extends React.Component {
                     <Link to={'/'}>
                         <img src={logo} alt={'logo'} className='header-logo'/>
                     </Link>
-                    <div className={'menu-container'}>
+                    <div className='menu-container'>
                         {authenticated && <>
                             <Button href={'/create'} color='inherit' id={'create_header_btn'}>новый тест</Button>
                             <Button href={`/user/results`} color='inherit'>мои результаты</Button>
@@ -37,13 +41,16 @@ export class Header extends React.Component {
                                 keepMounted
                                 anchorEl={this.state.profileMenuAnchor}
                                 open={Boolean(this.state.profileMenuAnchor)}
-                                onClose={() => this.setState({profileMenuAnchor: null})}
+                                onClose={this.closeUserMenu}
                             >
-                                <MenuItem onClick={() => this.setState({profileMenuAnchor: null})}>Мой
-                                    профиль</MenuItem>
+                                <Link to={'/user'} className='menu-item-link'>
+                                    <MenuItem onClick={this.closeUserMenu}>
+                                        Мой профиль
+                                    </MenuItem>
+                                </Link>
                                 <MenuItem onClick={() => {
                                     logoutRequest();
-                                    this.setState({profileMenuAnchor: null});
+                                    this.closeUserMenu();
                                 }}>Выйти</MenuItem>
                             </Menu>
                         </> :

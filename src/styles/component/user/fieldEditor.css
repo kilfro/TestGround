@@ -1,0 +1,19 @@
+.value {
+    margin-top: 0;
+    font-size: 2em !important;
+}
+
+.edit-icon {
+    display: none !important;
+    margin-left: 1em;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.value:hover > .edit-icon {
+    display: inline !important;
+}
+
+.edit-icon:hover {
+    opacity: 1;
+}

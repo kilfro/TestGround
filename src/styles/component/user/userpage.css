@@ -1,0 +1,16 @@
+.info-container {
+    margin-top: 1em;
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    grid-gap: 1em;
+}
+
+.avatar {
+    height: 5em !important;
+    width: 5em !important;
+}
+
+.user-email {
+    color: #515151;
+    font-weight: normal;
+}

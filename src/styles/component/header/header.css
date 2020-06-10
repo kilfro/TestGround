@@ -11,6 +11,7 @@
     flex-grow: 1;
 }
 
-.menu-icon {
-    margin-right: 5px;
+.menu-item-link {
+    color: inherit;
+    text-decoration: inherit;
 }

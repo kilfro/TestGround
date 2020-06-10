@@ -12,7 +12,7 @@ import {
     TableSortLabel,
     TextField
 } from "@material-ui/core";
-import '../../../styles/component/results/results.css';
+import '../../../styles/component/user/results.css';
 import {getFirebaseUser} from "../../../auth/auth";
 import {InputAdornment} from "@material-ui/core/es/index";
 import Search from "@material-ui/icons/esm/Search";

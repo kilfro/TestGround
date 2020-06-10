@@ -188,6 +188,13 @@ const getUserResults = (req, res) => {
         .then(result => res.status(200).json(result));
 };
 
+const updateUser = (req, res) => {
+    const {name, id} = req.body;
+
+    pool.query('update users set name = $1 where id = $2', [name, id])
+        .then(result => res.status(200));
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
@@ -195,5 +202,6 @@ module.exports = {
     getTest,
     checkPassword,
     saveAnswersAndReturnResult,
-    getUserResults
+    getUserResults,
+    updateUser
 };
