@@ -30,7 +30,13 @@ class UserPage extends React.Component {
         API.updateUser({
             ...this.state.fromBase,
             name: newName
-        })
+        });
+        this.setState(prev => ({
+            fromBase: {
+                ...prev.fromBase,
+                name: newName
+            }
+        }));
     };
 
     render() {

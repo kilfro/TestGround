@@ -36,7 +36,8 @@ class FieldEditor extends React.Component {
             <div>
                 {editMode ?
                     <form onSubmit={this.submitHandler}>
-                        <TextField value={editedValue} onChange={this.fieldChangeHandler} className='value'/>
+                        <TextField value={editedValue} onChange={this.fieldChangeHandler} className='input-value'
+                                   autoFocus/>
                     </form>
                     :
                     <h1 className='value'>{value}

@@ -1,6 +1,10 @@
 .value {
     margin-top: 0;
-    font-size: 2em !important;
+    font-size: 2em;
+}
+
+.input-value {
+    font-size: 3em !important;
 }
 
 .edit-icon {
