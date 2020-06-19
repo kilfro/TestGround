@@ -19,7 +19,7 @@ module.exports = app => {
     app.route('/api/test/result')
         .put(QUERIES.saveAnswersAndReturnResult);
 
-    app.route('/api/user/user/:userUid')
+    app.route('/api/user/results/:userUid')
         .get(QUERIES.getUserResults);
 
     app.route('/api/user/update')
