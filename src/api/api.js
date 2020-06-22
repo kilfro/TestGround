@@ -64,3 +64,7 @@ export const updateUser = (user) => {
 
     return axios.put('/api/user/update', body)
 };
+
+export const getUserTests = (userUid) => {
+    return axios.get(`/api/user/tests/${userUid}`);
+};

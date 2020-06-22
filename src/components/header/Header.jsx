@@ -31,6 +31,7 @@ export class Header extends React.Component {
                         {authenticated && <>
                             <Button href={'/create'} color='inherit' id={'create_header_btn'}>новый тест</Button>
                             <Button href={`/user/results`} color='inherit'>мои результаты</Button>
+                            <Button href={`/user/tests`} color='inherit'>мои тесты</Button>
                         </>}
                     </div>
                     {authenticated ?

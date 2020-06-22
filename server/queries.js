@@ -195,6 +195,18 @@ const updateUser = (req, res) => {
         .then(result => res.status(200));
 };
 
+const getTestsList = (req, res) => {
+    const userUid = req.params.userUid;
+
+    pool.query(`select t.test::jsonb #> '{description, name}' as name, t.uid, t.is_active, 
+                count(distinct (r.user_id)) as users
+                from tests as t join results r on t.id = r.test_id
+                join users u on t.user_id = u.id
+                where u.uid = '${userUid}'
+                group by (r.user_id, t.id)`)
+        .then(result => res.status(200).json(result));
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
@@ -203,5 +215,6 @@ module.exports = {
     checkPassword,
     saveAnswersAndReturnResult,
     getUserResults,
-    updateUser
+    updateUser,
+    getTestsList
 };

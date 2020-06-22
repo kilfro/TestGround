@@ -24,4 +24,7 @@ module.exports = app => {
 
     app.route('/api/user/update')
         .put(QUERIES.updateUser);
+
+    app.route('/api/user/tests/:userUid')
+        .get(QUERIES.getTestsList);
 };
