@@ -207,6 +207,13 @@ const getTestsList = (req, res) => {
         .then(result => res.status(200).json(result));
 };
 
+const changeActivity = (req, res) => {
+    const {uid, isActive} = req.body;
+
+    pool.query('update tests set is_active = $1 where uid = $2', [isActive, uid])
+        .then(() => res.status(200));
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
@@ -216,5 +223,6 @@ module.exports = {
     saveAnswersAndReturnResult,
     getUserResults,
     updateUser,
-    getTestsList
+    getTestsList,
+    changeActivity,
 };

@@ -59,6 +59,20 @@ class UserTestsPage extends React.Component {
         this.setState({searchFor: value});
     };
 
+    changeActivity = (event) => {
+        const {id, checked} = event.target;
+        API.changeTestActivity(id, checked)
+            .then(this.updateActivity(id, checked));
+    };
+
+    updateActivity = (uid, isActive) => {
+        const correctList = [...this.state.testsList].map(test =>
+            test.uid === uid ? {...test, is_active: isActive} : test
+        );
+
+        this.setState({testsList: correctList});
+    };
+
     render() {
         const {order, orderBy} = this.state;
 
@@ -100,7 +114,7 @@ class UserTestsPage extends React.Component {
                                 </TableCell>
                                 <TableCell
                                     className='small'
-                                    align="right"
+                                    align="center"
                                     sortDirection={orderBy === 'is_active' ? order : false}>
                                     <TableSortLabel
                                         id={'is_active'}
@@ -130,8 +144,10 @@ class UserTestsPage extends React.Component {
                             {testsList.map((test, index) =>
                                 <TableRow key={index} className={(index % 2 === 0 ? ' gray-row' : '') + ' body-row'}>
                                     <TableCell>{test.name}</TableCell>
-                                    <TableCell align="right">
+                                    <TableCell align="center">
                                         <Checkbox
+                                            id={test.uid}
+                                            onChange={this.changeActivity}
                                             checked={test.is_active}
                                             color="primary"
                                             inputProps={{'aria-label': 'primary checkbox'}}

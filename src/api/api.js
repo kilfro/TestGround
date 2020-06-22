@@ -68,3 +68,12 @@ export const updateUser = (user) => {
 export const getUserTests = (userUid) => {
     return axios.get(`/api/user/tests/${userUid}`);
 };
+
+export function changeTestActivity(uid, isActive) {
+    const body = {
+        uid,
+        isActive
+    };
+
+    return axios.put('/api/test/changeActivity', body);
+}

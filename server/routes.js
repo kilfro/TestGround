@@ -10,6 +10,9 @@ module.exports = app => {
     app.route('/api/test/create')
         .post(QUERIES.createTest);
 
+    app.route('/api/test/changeActivity')
+        .put(QUERIES.changeActivity);
+
     app.route('/api/test/get/:uid')
         .get(QUERIES.getTest);
 
