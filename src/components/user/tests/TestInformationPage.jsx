@@ -2,16 +2,19 @@ import React from 'react';
 import * as API from '../../../api/api';
 import {
     Container,
+    InputAdornment,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
     TableRow,
-    TableSortLabel
+    TableSortLabel,
+    TextField,
 } from "@material-ui/core";
 import {Paper} from "@material-ui/core/index";
 import {compare} from "../../supporting/Functions";
+import Search from "@material-ui/icons/esm/Search";
 
 class TestInformationPage extends React.Component {
     constructor(props) {
@@ -20,7 +23,8 @@ class TestInformationPage extends React.Component {
             testInfo: {},
             userStatistic: [],
             order: 'asc',
-            orderBy: 'name'
+            orderBy: 'name',
+            searchFor: '',
         };
     }
 
@@ -51,16 +55,35 @@ class TestInformationPage extends React.Component {
         }
     };
 
+    searchChangeHandler = (event) => {
+        const {value} = event.target;
+
+        this.setState({searchFor: value});
+    };
+
     render() {
         const {testInfo, order, orderBy} = this.state;
         const userStatistic = [...this.state.userStatistic]
+            .filter(stat => stat.name.includes(this.state.searchFor.trim()))
             .sort((a, b) => {
                 return order === 'asc' ? compare(a, b, orderBy) : -compare(a, b, orderBy);
             });
 
         return (
             <Container maxWidth={'md'}>
-                <h3>{testInfo.name}</h3>
+                <div className='table-title'>
+                    <h3>{testInfo.name}</h3>
+                    <TextField
+                        onChange={this.searchChangeHandler}
+                        placeholder={'Поиск по имени'}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search/>
+                                </InputAdornment>
+                            ),
+                        }}/>
+                </div>
                 <TableContainer component={Paper} className='result-table'>
                     <Table aria-label="simple table">
                         <TableHead>
