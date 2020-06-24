@@ -69,11 +69,15 @@ export const getUserTests = (userUid) => {
     return axios.get(`/api/user/tests/${userUid}`);
 };
 
-export function changeTestActivity(uid, isActive) {
+export const changeTestActivity = (uid, isActive) => {
     const body = {
         uid,
         isActive
     };
 
     return axios.put('/api/test/changeActivity', body);
-}
+};
+
+export const getTestInfo = uid => axios.get(`/api/test/info/${uid}`);
+
+export const getTestUserStatistic = uid => axios.get(`/api/test/statistic/user/${uid}`);

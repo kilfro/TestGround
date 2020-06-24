@@ -16,6 +16,7 @@ import MainTestPage from "./components/test-page/MainTestPage";
 import ResultsPage from "./components/user/results/ResultsPage";
 import UserPage from "./components/user/page/UserPage";
 import UserTestsPage from "./components/user/tests/UserTestsPage";
+import TestInformationPage from "./components/user/tests/TestInformationPage";
 
 const App = (props) => {
     const {error, deleteError} = props;
@@ -33,6 +34,7 @@ const App = (props) => {
                     <Route exact path={'/user'} component={UserPage}/>
                     <Route exact path={'/user/results'} component={ResultsPage}/>
                     <Route exact path={'/user/tests'} component={UserTestsPage}/>
+                    <Route exact path={'/user/tests/:uid'} component={TestInformationPage}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </BrowserRouter>

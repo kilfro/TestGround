@@ -17,6 +17,7 @@ import * as API from "../../../api/api";
 import {getFirebaseUser} from "../../../auth/auth";
 import {Paper} from "@material-ui/core/index";
 import {compare} from "../../supporting/Functions";
+import {Link} from "react-router-dom";
 
 class UserTestsPage extends React.Component {
     constructor(props) {
@@ -143,7 +144,7 @@ class UserTestsPage extends React.Component {
                         <TableBody>
                             {testsList.map((test, index) =>
                                 <TableRow key={index} className={(index % 2 === 0 ? ' gray-row' : '') + ' body-row'}>
-                                    <TableCell>{test.name}</TableCell>
+                                    <TableCell><Link to={`/user/tests/${test.uid}`}>{test.name}</Link></TableCell>
                                     <TableCell align="center">
                                         <Checkbox
                                             id={test.uid}

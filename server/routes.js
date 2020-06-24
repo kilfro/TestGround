@@ -30,4 +30,10 @@ module.exports = app => {
 
     app.route('/api/user/tests/:userUid')
         .get(QUERIES.getTestsList);
+
+    app.route('/api/test/info/:uid')
+        .get(QUERIES.getTestInfo);
+
+    app.route('/api/test/statistic/user/:uid')
+        .get(QUERIES.getTestUsersStatistic);
 };

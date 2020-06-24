@@ -214,6 +214,25 @@ const changeActivity = (req, res) => {
         .then(() => res.status(200));
 };
 
+const getTestInfo = (req, res) => {
+    const {uid} = req.params;
+
+    pool.query(`select test::jsonb #> '{description, name}' as name, is_active as isActive 
+                from tests where uid = '${uid}'`)
+        .then(result => res.status(200).json(result.rows[0]));
+};
+
+const getTestUsersStatistic = (req, res) => {
+    const {uid} = req.params;
+    pool.query(`select u.name, count(r.user_id) as attempts, max(r.result->>'percent') as max
+                from tests as t
+                    join results r on t.id = r.test_id
+                    join users u on t.user_id = u.id
+                where t.uid = '${uid}'
+                group by (r.user_id, u.name)`)
+        .then(result => res.status(200).json(result.rows));
+};
+
 module.exports = {
     getUserByUid,
     insertUser,
@@ -225,4 +244,6 @@ module.exports = {
     updateUser,
     getTestsList,
     changeActivity,
+    getTestInfo,
+    getTestUsersStatistic
 };
