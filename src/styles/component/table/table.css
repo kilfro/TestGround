@@ -1,0 +1,26 @@
+.table-title * {
+    flex-grow: 1;
+}
+
+.table-title {
+    margin-top: 1em;
+    display: flex;
+}
+
+.small {
+    width: 15%;
+}
+
+.table-head * {
+    font-weight: bold;
+}
+
+td a {
+    text-decoration: none;
+    color: inherit;
+}
+
+td a:hover {
+    color: #0074D9;
+    text-decoration: underline;
+}
