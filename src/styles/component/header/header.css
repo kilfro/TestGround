@@ -15,3 +15,7 @@
     color: inherit;
     text-decoration: inherit;
 }
+
+.menu-container a {
+    margin: 5px;
+}

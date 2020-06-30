@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/es/TableRow/TableRow";
 import HeaderCell from "./HeaderCell";
 import TableBody from "@material-ui/core/es/TableBody/TableBody";
 import Row from "./Row";
+import {compare} from "../supporting/Functions";
 
 class Table extends React.Component {
 
@@ -58,9 +59,22 @@ class Table extends React.Component {
         }
     };
 
+    getPreparedData = () => {
+        const {data, search} = this.props;
+        const {searchString, orderBy, order} = this.state;
+
+        return data
+            .filter(item => search ? item[search.searchFor].includes(searchString.trim()) : true)
+            .sort((a, b) => {
+                return order === 'asc' ? compare(a, b, orderBy) : -compare(a, b, orderBy);
+            });
+    };
+
     render() {
-        const {name, search, columnsDescription, data} = this.props;
+        const {name, search, columnsDescription} = this.props;
         const {orderBy, order} = this.state;
+
+        const data = this.getPreparedData();
 
         return (
             <TableContainer>
