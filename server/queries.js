@@ -233,6 +233,22 @@ const getTestUsersStatistic = (req, res) => {
         .then(result => res.status(200).json(result.rows));
 };
 
+const getTestAttempts = (req, res) => {
+    const {testUid, userUid} = req.params;
+
+    pool.query(`
+        select count(*) as count, coalesce((t.test::jsonb #> '{description, attempts}'), '0') as max
+        from results as r
+         join tests t on r.test_id = t.id
+         join users u on r.user_id = u.id
+        where t.uid = '${testUid}'
+         and u.uid = '${userUid}'
+        group by t.test
+    `)
+        .then(result => res.status(200).json(result.rows[0]));
+};
+
+
 module.exports = {
     getUserByUid,
     insertUser,
@@ -245,5 +261,6 @@ module.exports = {
     getTestsList,
     changeActivity,
     getTestInfo,
-    getTestUsersStatistic
+    getTestUsersStatistic,
+    getTestAttempts,
 };

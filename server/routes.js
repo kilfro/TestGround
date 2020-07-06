@@ -36,4 +36,7 @@ module.exports = app => {
 
     app.route('/api/test/statistic/user/:uid')
         .get(QUERIES.getTestUsersStatistic);
+
+    app.route('/api/test/attempts/:testUid/:userUid')
+        .get(QUERIES.getTestAttempts)
 };

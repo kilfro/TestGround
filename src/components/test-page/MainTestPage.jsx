@@ -9,6 +9,7 @@ import TestResult from "./TestResult";
 import {cleanAnswers} from "../../store/actions/answers";
 import {cleanResult} from "../../store/actions/result";
 import {Redirect} from "react-router";
+import {getFirebaseUser} from "../../auth/auth";
 
 class MainTestPage extends React.Component {
     constructor(props) {
@@ -24,6 +25,13 @@ class MainTestPage extends React.Component {
         API.getTest(uid).then(res => {
             this.setState({test: res.data})
         });
+
+        getFirebaseUser()
+            .then(user =>
+                API.checkAvailable(uid, user.uid)
+                    .then(({data}) => {
+                        this.setState({available: data.max === 0 ? true : data.count < data.max})
+                    }))
     }
 
     componentWillUnmount() {
@@ -36,7 +44,7 @@ class MainTestPage extends React.Component {
     };
 
     render() {
-        const {tabPosition, test} = this.state;
+        const {tabPosition, test, available} = this.state;
 
         const {authenticated} = this.props;
         const {onlyRegistered} = test;
@@ -44,23 +52,21 @@ class MainTestPage extends React.Component {
         const descriptionProps = {
             uid: test.uid,
             name: test.name,
-            anonymous: test.anonymous,
             additional: test.additional,
             needPassword: test.needPassword,
             nextTab: this.nextTab
         };
 
         const questionsProps = {
-            anonymous: test.anonymous,
             testUid: test.uid,
             questions: test.questions,
             nextTab: this.nextTab
         };
 
-        console.log(authenticated);
         return (
             <Container maxWidth={'md'}>
                 {(onlyRegistered && (authenticated !== undefined && !authenticated)) && <Redirect to={'/login'}/>}
+                {!available && <Redirect to={'/no-attempts'}/>}
                 <Stepper activeStep={tabPosition}>
                     <Step id={'to-description'}>
                         <StepLabel>Информация о тесте</StepLabel>

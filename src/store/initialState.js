@@ -13,9 +13,9 @@ export default {
             name: '',
             additional: '',
             password: '',
-            anonymous: false,
             onlyRegistered: false,
-            needPassword: false
+            needPassword: false,
+            attempts: 0
         },
         questions: [
             {

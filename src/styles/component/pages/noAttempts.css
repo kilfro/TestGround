@@ -1,0 +1,12 @@
+.no-attempts {
+    text-align: center;
+    margin: .5em;
+    color: hsl(180, 24%, 17%);
+    font-size: 1em;
+    font-weight: bold;
+    user-select: none;
+}
+
+.no-attempts div {
+    margin: 2em 0;
+}

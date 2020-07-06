@@ -7,7 +7,7 @@ import {changeDescription} from "../../store/actions/newTest";
 import {connect} from 'react-redux';
 
 const TestDescription = (props) => {
-    const {name, additional, anonymous, onlyRegistered, needPassword, password} = props.description;
+    const {name, additional, anonymous, onlyRegistered, needPassword, password, attempts} = props.description;
     const {changeDescription, nextTab} = props;
 
     const generatePassword = () => {
@@ -57,13 +57,16 @@ const TestDescription = (props) => {
             <h3>Описание теста:</h3>
             <TextField multiline rows={3} fullWidth id={'additional'} value={additional}
                        onChange={onChangeHandler}/>
-            <FormControlLabel
-                control={<Switch id='anonymous' value={anonymous} onChange={onChangeHandler}/>}
-                label={<div>
-                    <h3>Анонимный тест</h3>
-                    <span>Информация о пользователе не будет сохранена в результатах теста</span>
-                </div>}
-            />
+
+            <div className='prop-container'>
+                <div>
+                    <h3>Доступное количество попыток: </h3>
+                    <span>(0 - без ограничений)</span>
+                </div>
+                <TextField id={'attempts'} className='question-option' type={'number'}
+                           inputProps={{min: 0, step: 1}} onChange={onChangeHandler} value={attempts}/>
+            </div>
+
             <FormControlLabel
                 control={<Switch id='onlyRegistered' value={onlyRegistered}
                                  onChange={onChangeHandler}/>}

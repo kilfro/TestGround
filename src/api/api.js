@@ -81,3 +81,6 @@ export const changeTestActivity = (uid, isActive) => {
 export const getTestInfo = uid => axios.get(`/api/test/info/${uid}`);
 
 export const getTestUserStatistic = uid => axios.get(`/api/test/statistic/user/${uid}`);
+
+export const checkAvailable = (testUid, userUid) => axios.get(`/api/test/attempts/${testUid}/${userUid}`);
+// export const checkAvailable = (testUid,  userUid) => Promise.resolve({count: 2, maxAttempts: 1});

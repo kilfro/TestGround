@@ -43,13 +43,12 @@ class TestDescription extends React.Component {
     };
 
     render() {
-        const {name, additional, anonymous, needPassword} = this.props;
+        const {name, additional, needPassword} = this.props;
         const {inputPassword} = this.state;
 
         return (
             <>
                 <h2>{name}</h2>
-                {anonymous && <h5 className='anonymous'>Анонимный тест</h5>}
                 <div className='additional-info'>{additional}</div>
                 {needPassword && <div className='password-box'>
                     <span>Для продолжения необходимо ввести пароль:</span>
