@@ -1,0 +1,17 @@
+.message {
+    text-align: center;
+    margin: .5em;
+    color: hsl(180, 24%, 17%);
+    font-size: 1.5em;
+    font-weight: bold;
+    user-select: none;
+}
+
+.message button {
+    margin: .5em;
+}
+
+.test-name {
+    color: black;
+    font-weight: bolder;
+}
