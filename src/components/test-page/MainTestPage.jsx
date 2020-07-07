@@ -16,7 +16,8 @@ class MainTestPage extends React.Component {
         super(props);
         this.state = {
             test: {},
-            tabPosition: 0
+            tabPosition: 0,
+            available: true
         };
     }
 
